@@ -1,0 +1,27 @@
+# .gitattributes - used to set attributes for files in the repository
+# This file can be used to define how Git should handle certain files,
+# such as setting line endings, diff settings, or merge strategies.
+
+# Normalize all text files to LF by default
+* text=auto eol=lf
+
+# Markdown files always LF
+*.md text eol=lf
+
+# Python always LF
+*.py text eol=lf
+
+# Shell scripts always LF
+scripts/*.sh text eol=lf
+
+# Jupyter notebooks (JSON) treated as text for clean diffs
+*.ipynb text
+
+# Keep binary files untouched
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
