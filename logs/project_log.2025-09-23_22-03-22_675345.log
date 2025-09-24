@@ -1,0 +1,359 @@
+2025-09-23 22:03:22 | INFO | {'message': 'I just tried a movie! It was funny.', 'author': 'Eve', 'timestamp': '2025-09-23 22:03:22', 'category': 'entertainment', 'sentiment': 0.23, 'keyword_mentioned': 'movie', 'message_length': 35}
+2025-09-23 22:03:27 | INFO | {'message': 'I just found a meme! It was funny.', 'author': 'Bob', 'timestamp': '2025-09-23 22:03:27', 'category': 'humor', 'sentiment': 0.83, 'keyword_mentioned': 'meme', 'message_length': 34}
+2025-09-23 22:03:32 | INFO | {'message': 'I just found JavaScript! It was funny.', 'author': 'Charlie', 'timestamp': '2025-09-23 22:03:32', 'category': 'tech', 'sentiment': 0.03, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 22:03:37 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:03:37 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:03:37 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 22:03:37 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:03:37 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 22:03:37 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:03:37 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:03:37 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:03:37 | WARNING | [consumer_data_git_hub] No reference file found; author validation will be 0.
+2025-09-23 22:03:37 | WARNING | [consumer_data_git_hub] No flag words file found; keyword alerts will never trigger.
+2025-09-23 22:03:37 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:03:37 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:03:37 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:03:37 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 22:03:37 | INFO | {'message': 'I just tried travel! It was funny.', 'author': 'Bob', 'timestamp': '2025-09-23 22:03:37', 'category': 'travel', 'sentiment': 0.24, 'keyword_mentioned': 'travel', 'message_length': 34}
+2025-09-23 22:03:37 | INFO | Kafka consumer created successfully.
+2025-09-23 22:03:37 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:02:52', 'author': 'Eve', 'message': 'I just loved Python! It was weird.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:02:57', 'author': 'Eve', 'message': 'I just found a meme! It was amazing.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:02', 'author': 'Charlie', 'message': 'I just shared JavaScript! It was boring.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:07', 'author': 'Bob', 'message': 'I just shared JavaScript! It was exciting.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:12', 'author': 'Charlie', 'message': 'I just found Python! It was funny.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:17', 'author': 'Bob', 'message': 'I just tried travel! It was exciting.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:22', 'author': 'Eve', 'message': 'I just tried a movie! It was funny.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:27', 'author': 'Bob', 'message': 'I just found a meme! It was funny.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:32', 'author': 'Charlie', 'message': 'I just found JavaScript! It was funny.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:37', 'author': 'Bob', 'message': 'I just tried travel! It was funny.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:42 | INFO | {'message': 'I just saw game! It was boring.', 'author': 'Charlie', 'timestamp': '2025-09-23 22:03:42', 'category': 'gaming', 'sentiment': 0.39, 'keyword_mentioned': 'game', 'message_length': 31}
+2025-09-23 22:03:42 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:42', 'author': 'Charlie', 'message': 'I just saw game! It was boring.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:42 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:47 | INFO | {'message': 'I just tried game! It was weird.', 'author': 'Eve', 'timestamp': '2025-09-23 22:03:47', 'category': 'gaming', 'sentiment': 0.05, 'keyword_mentioned': 'game', 'message_length': 32}
+2025-09-23 22:03:47 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:47', 'author': 'Eve', 'message': 'I just tried game! It was weird.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:47 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:52 | INFO | {'message': 'I just shared Python! It was weird.', 'author': 'Eve', 'timestamp': '2025-09-23 22:03:52', 'category': 'tech', 'sentiment': 0.26, 'keyword_mentioned': 'Python', 'message_length': 35}
+2025-09-23 22:03:52 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:03:52', 'author': 'Eve', 'message': 'I just shared Python! It was weird.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:03:52 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:03:53 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-23 22:03:53 | INFO | [consumer_data_git_hub] Shutdown complete.
+2025-09-23 22:03:57 | INFO | {'message': 'I just tried JavaScript! It was funny.', 'author': 'Charlie', 'timestamp': '2025-09-23 22:03:57', 'category': 'tech', 'sentiment': 0.98, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 22:03:58 | WARNING | Producer interrupted by user.
+2025-09-23 22:03:58 | INFO | Kafka producer closed.
+2025-09-23 22:03:58 | INFO | Producer shutting down.
+2025-09-23 22:08:11 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:08:11 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:08:11 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:08:11 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:08:11 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:08:11 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:08:11 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:08:11 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:08:11 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:08:11 | INFO | Deleted existing live data file.
+2025-09-23 22:08:11 | ERROR | [producer_much_ado] Could not find much_ado_excerpt JSON in any known location.
+2025-09-23 22:08:11 | ERROR | [producer_much_ado] No data to emit. Exiting.
+2025-09-23 22:10:36 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:10:36 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:10:36 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:10:36 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:10:36 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:10:36 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:10:36 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:10:36 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:10:36 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:10:36 | INFO | [producer_much_ado] Loaded 321 authors and 321 messages from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:10:36 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:37 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:10:37 | INFO | [producer_much_ado] Kafka producer connected to 127.0.0.1:9092
+2025-09-23 22:10:37 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:37 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:10:37 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:10:37 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:10:37 | INFO | [producer_much_ado] Kafka topic 'buzzline' is ready.
+2025-09-23 22:10:37 | INFO | {'message': 'Have left their places vacant, in their rooms', 'author': 'don john', 'timestamp': '2025-09-23 22:10:37', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 45}
+2025-09-23 22:10:42 | INFO | {'message': 'A dear happiness to women: they would else have been troubled', 'author': 'messenger', 'timestamp': '2025-09-23 22:10:42', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:10:47 | INFO | {'message': 'Data engineering is my passion.', 'author': 'benedick', 'timestamp': '2025-09-23 22:10:47', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 31}
+2025-09-23 22:10:50 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:10:50 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:10:50 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:10:50 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:10:50 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:10:50 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:10:50 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:10:50 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:10:50 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:10:50 | INFO | Deleted existing live data file.
+2025-09-23 22:10:50 | INFO | [producer_much_ado] Loaded 321 authors and 321 messages from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:10:50 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:50 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:10:50 | INFO | [producer_much_ado] Kafka producer connected to 127.0.0.1:9092
+2025-09-23 22:10:50 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:50 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:10:50 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:10:50 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:10:50 | INFO | [producer_much_ado] Kafka topic 'buzzline' is ready.
+2025-09-23 22:10:50 | INFO | {'message': 'professed tyrant to their sex?', 'author': 'beatrice', 'timestamp': '2025-09-23 22:10:50', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 30}
+2025-09-23 22:10:52 | INFO | {'message': 'In mine eye she is the sweetest lady that ever I looked on.', 'author': 'claudio', 'timestamp': '2025-09-23 22:10:52', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 59}
+2025-09-23 22:10:55 | WARNING | [producer_much_ado] Interrupted by user.
+2025-09-23 22:10:55 | INFO | [producer_much_ado] Kafka producer closed.
+2025-09-23 22:10:55 | INFO | [producer_much_ado] Shutting down.
+2025-09-23 22:10:57 | INFO | {'message': 'be meet with you, I doubt it not.', 'author': 'don john', 'timestamp': '2025-09-23 22:10:57', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 33}
+2025-09-23 22:10:57 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:10:57 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:10:57 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 22:10:57 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:10:57 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 22:10:57 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:10:57 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:10:57 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:10:57 | WARNING | [consumer_data_git_hub] No reference file found; author validation will be 0.
+2025-09-23 22:10:57 | WARNING | [consumer_data_git_hub] No flag words file found; keyword alerts will never trigger.
+2025-09-23 22:10:57 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:58 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:10:58 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:10:58 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 22:10:58 | INFO | Kafka consumer created successfully.
+2025-09-23 22:10:58 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 22:10:58 | ERROR | [consumer_data_git_hub] Runtime error: Invalid file descriptor: -1
+2025-09-23 22:10:58 | INFO | [consumer_data_git_hub] Shutdown complete.
+2025-09-23 22:11:02 | INFO | {'message': 'beauty as the first of May doth the last of December. But I hope you have', 'author': 'benedick', 'timestamp': '2025-09-23 22:11:02', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:11:06 | WARNING | [producer_much_ado] Interrupted by user.
+2025-09-23 22:11:06 | INFO | [producer_much_ado] Kafka producer closed.
+2025-09-23 22:11:06 | INFO | [producer_much_ado] Shutting down.
+2025-09-23 22:15:10 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:15:10 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:15:10 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:15:10 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:15:10 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:15:10 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:15:10 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:15:10 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:15:10 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:15:10 | INFO | Deleted existing live data file.
+2025-09-23 22:15:10 | INFO | [producer_much_ado] Loaded 321 authors and 321 messages from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:15:10 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:15:11 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:15:11 | INFO | [producer_much_ado] Kafka producer connected to 127.0.0.1:9092
+2025-09-23 22:15:11 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:15:11 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:15:11 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:15:11 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:15:11 | INFO | [producer_much_ado] Kafka topic 'buzzline' is ready.
+2025-09-23 22:15:11 | INFO | {'message': 'With anger, with sickness, or with hunger, my lord; not with', 'author': 'messenger', 'timestamp': '2025-09-23 22:15:11', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 60}
+2025-09-23 22:15:16 | INFO | {'message': 'weeping!', 'author': 'don pedro', 'timestamp': '2025-09-23 22:15:16', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 8}
+2025-09-23 22:15:17 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:15:17 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:15:17 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 22:15:17 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:15:17 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 22:15:17 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:15:17 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:15:17 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:15:17 | INFO | [consumer_data_git_hub] Loaded reference pairs: 321 from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:15:17 | INFO | [consumer_data_git_hub] Loaded 42 flag words from PROJECT_ROOT/files/flag_words.txt
+2025-09-23 22:15:17 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:15:17 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:15:17 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:15:17 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 22:15:17 | INFO | Kafka consumer created successfully.
+2025-09-23 22:15:17 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 22:15:20 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:16', 'author': 'don pedro', 'message': 'weeping!', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:20 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:21 | INFO | {'message': 'But few of any sort, and none of name.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:15:21', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 38}
+2025-09-23 22:15:21 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:21', 'author': 'beatrice', 'message': 'But few of any sort, and none of name.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:21 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:26 | INFO | {'message': 'Let me bid you welcome, my lord: being reconciled to', 'author': 'benedick', 'timestamp': '2025-09-23 22:15:26', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 52}
+2025-09-23 22:15:26 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:26', 'author': 'benedick', 'message': 'Let me bid you welcome, my lord: being reconciled to', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:26 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:31 | INFO | {'message': 'noble Claudio! If he have caught the Benedick, it will cost him a thousand', 'author': 'benedick', 'timestamp': '2025-09-23 22:15:31', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:15:31 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:31', 'author': 'benedick', 'message': 'noble Claudio! If he have caught the Benedick, it will cost him a thousand', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:31 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:36 | INFO | {'message': 'hath every month a new sworn brother.', 'author': 'benedick', 'timestamp': '2025-09-23 22:15:36', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 37}
+2025-09-23 22:15:36 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:36', 'author': 'benedick', 'message': 'hath every month a new sworn brother.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:36 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:41 | INFO | {'message': 'If Signior Leonato be her father, she would not have his head on', 'author': 'beatrice', 'timestamp': '2025-09-23 22:15:41', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 64}
+2025-09-23 22:15:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:41', 'author': 'beatrice', 'message': 'If Signior Leonato be her father, she would not have his head on', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:46 | INFO | {'message': 'That a woman conceived me, I thank her; that she brought me up,', 'author': 'don john', 'timestamp': '2025-09-23 22:15:46', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:15:46 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:46', 'author': 'don john', 'message': 'That a woman conceived me, I thank her; that she brought me up,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:46 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:51 | INFO | {'message': 'meant to take the present time by the top and instantly break with you of', 'author': 'benedick', 'timestamp': '2025-09-23 22:15:51', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:15:51 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:51', 'author': 'benedick', 'message': 'meant to take the present time by the top and instantly break with you of', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:51 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:15:56 | INFO | {'message': 'Look! Don Pedro is returned to seek you.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:15:56', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 40}
+2025-09-23 22:15:56 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:15:56', 'author': 'don pedro', 'message': 'Look! Don Pedro is returned to seek you.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:15:56 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:01 | INFO | {'message': 'pluck off the bull’s horns and set them in my forehead; and let me', 'author': 'benedick', 'timestamp': '2025-09-23 22:16:01', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 66}
+2025-09-23 22:16:01 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:01', 'author': 'benedick', 'message': 'pluck off the bull’s horns and set them in my forehead; and let me', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:01 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:06 | INFO | {'message': 'You had musty victual, and he hath holp to eat it; he is a very', 'author': 'don john', 'timestamp': '2025-09-23 22:16:06', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:16:06 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:06', 'author': 'don john', 'message': 'You had musty victual, and he hath holp to eat it; he is a very', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:06 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:11 | INFO | {'message': 'You had musty victual, and he hath holp to eat it; he is a very', 'author': 'beatrice', 'timestamp': '2025-09-23 22:16:11', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:16:11 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:11', 'author': 'beatrice', 'message': 'You had musty victual, and he hath holp to eat it; he is a very', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:11 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:16 | INFO | {'message': 'carriage to rob love from any: in this, though I cannot be said to be a', 'author': 'beatrice', 'timestamp': '2025-09-23 22:16:16', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:16:16 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:16', 'author': 'beatrice', 'message': 'carriage to rob love from any: in this, though I cannot be said to be a', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:16 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:21 | INFO | {'message': 'that if he have wit enough to keep himself warm, let him bear it for a', 'author': 'conrade', 'timestamp': '2025-09-23 22:16:21', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 70}
+2025-09-23 22:16:21 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:21', 'author': 'conrade', 'message': 'that if he have wit enough to keep himself warm, let him bear it for a', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:21 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:26 | INFO | {'message': 'You should hear reason.', 'author': 'antonio', 'timestamp': '2025-09-23 22:16:26', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 23}
+2025-09-23 22:16:26 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:26', 'author': 'antonio', 'message': 'You should hear reason.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:26 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:31 | INFO | {'message': 'Is’t possible?', 'author': 'don pedro', 'timestamp': '2025-09-23 22:16:31', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 14}
+2025-09-23 22:16:31 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:31', 'author': 'don pedro', 'message': 'Is’t possible?', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:31 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:36 | INFO | {'message': 'How many gentlemen have you lost in this action?', 'author': 'messenger', 'timestamp': '2025-09-23 22:16:36', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 48}
+2025-09-23 22:16:36 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:36', 'author': 'messenger', 'message': 'How many gentlemen have you lost in this action?', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:36 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:41 | INFO | {'message': 'comes me the Prince and Claudio, hand in hand, in sad conference: I whipt', 'author': 'don pedro', 'timestamp': '2025-09-23 22:16:41', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:16:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:41', 'author': 'don pedro', 'message': 'comes me the Prince and Claudio, hand in hand, in sad conference: I whipt', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:46 | INFO | {'message': 'his companion? Is there no young squarer now that will make a voyage with', 'author': 'leonato', 'timestamp': '2025-09-23 22:16:46', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:16:46 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:46', 'author': 'leonato', 'message': 'his companion? Is there no young squarer now that will make a voyage with', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:46 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:51 | INFO | {'message': 'Even he.', 'author': 'benedick', 'timestamp': '2025-09-23 22:16:51', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 8}
+2025-09-23 22:16:51 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:51', 'author': 'benedick', 'message': 'Even he.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:51 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:16:56 | INFO | {'message': 'O! my lord,', 'author': 'leonato', 'timestamp': '2025-09-23 22:16:56', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 11}
+2025-09-23 22:16:56 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:16:56', 'author': 'leonato', 'message': 'O! my lord,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:16:56 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:01 | INFO | {'message': 'continuer. But keep your way, i’ God’s name; I have done.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:17:01', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 57}
+2025-09-23 22:17:01 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:01', 'author': 'beatrice', 'message': 'continuer. But keep your way, i’ God’s name; I have done.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:01 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:06 | INFO | {'message': 'discovered to Claudio that he loved my niece your daughter and meant to', 'author': 'claudio', 'timestamp': '2025-09-23 22:17:06', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:17:06 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:06', 'author': 'claudio', 'message': 'discovered to Claudio that he loved my niece your daughter and meant to', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:06 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:11 | INFO | {'message': 'As the event stamps them: but they have a good cover; they show', 'author': 'don pedro', 'timestamp': '2025-09-23 22:17:11', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:17:11 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:11', 'author': 'don pedro', 'message': 'As the event stamps them: but they have a good cover; they show', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:11 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:16 | INFO | {'message': 'You hear, Count Claudio: I can be secret as a dumb man; I would', 'author': 'leonato', 'timestamp': '2025-09-23 22:17:16', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:17:16 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:16', 'author': 'leonato', 'message': 'You hear, Count Claudio: I can be secret as a dumb man; I would', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:16 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:21 | INFO | {'message': 'have you think so; but on my allegiance mark you this, on my allegiance:', 'author': 'antonio', 'timestamp': '2025-09-23 22:17:21', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 72}
+2025-09-23 22:17:21 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:21', 'author': 'antonio', 'message': 'have you think so; but on my allegiance mark you this, on my allegiance:', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:21 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:26 | INFO | {'message': 'I had rather be a canker in a hedge than a rose in his grace;', 'author': 'benedick', 'timestamp': '2025-09-23 22:17:26', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:17:26 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:26', 'author': 'benedick', 'message': 'I had rather be a canker in a hedge than a rose in his grace;', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:26 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:31 | INFO | {'message': 'A dear happiness to women: they would else have been troubled', 'author': 'messenger', 'timestamp': '2025-09-23 22:17:31', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:17:31 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:31', 'author': 'messenger', 'message': 'A dear happiness to women: they would else have been troubled', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:31 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:36 | INFO | {'message': 'women shall pardon me. Because I will not do them the wrong to mistrust', 'author': 'don john', 'timestamp': '2025-09-23 22:17:36', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:17:36 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:36', 'author': 'don john', 'message': 'women shall pardon me. Because I will not do them the wrong to mistrust', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:36 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:41 | INFO | {'message': 'O! my lord,', 'author': 'messenger', 'timestamp': '2025-09-23 22:17:41', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 11}
+2025-09-23 22:17:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:41', 'author': 'messenger', 'message': 'O! my lord,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:46 | INFO | {'message': 'betwixt Signior Benedick and her; they never meet but there’s a', 'author': 'don john', 'timestamp': '2025-09-23 22:17:46', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:17:46 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:46', 'author': 'don john', 'message': 'betwixt Signior Benedick and her; they never meet but there’s a', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:46 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:51 | INFO | {'message': 'likest her.', 'author': 'conrade', 'timestamp': '2025-09-23 22:17:51', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 11}
+2025-09-23 22:17:51 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:51', 'author': 'conrade', 'message': 'likest her.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:51 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:17:56 | INFO | {'message': 'In great measure.', 'author': 'benedick', 'timestamp': '2025-09-23 22:17:56', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 17}
+2025-09-23 22:17:56 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:17:56', 'author': 'benedick', 'message': 'In great measure.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:17:56 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:01 | INFO | {'message': 'Alas! he gets nothing by that. In our last conflict four of his', 'author': 'leonato', 'timestamp': '2025-09-23 22:18:01', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:18:01 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:18:01', 'author': 'leonato', 'message': 'Alas! he gets nothing by that. In our last conflict four of his', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:18:01 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:06 | INFO | {'message': 'If I do, hang me in a bottle like a cat and shoot at me; and he', 'author': 'leonato', 'timestamp': '2025-09-23 22:18:06', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:18:06 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:18:06', 'author': 'leonato', 'message': 'If I do, hang me in a bottle like a cat and shoot at me; and he', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:18:06 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:11 | INFO | {'message': 'What is he that you ask for, niece?', 'author': 'messenger', 'timestamp': '2025-09-23 22:18:11', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 35}
+2025-09-23 22:18:11 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:18:11', 'author': 'messenger', 'message': 'What is he that you ask for, niece?', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:18:11 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:16 | INFO | {'message': 'Balthasar and Others.', 'author': 'leonato', 'timestamp': '2025-09-23 22:18:16', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 21}
+2025-09-23 22:18:16 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:18:16', 'author': 'leonato', 'message': 'Balthasar and Others.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:18:16 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:21 | INFO | {'message': 'All prompting me how fair young Hero is,', 'author': 'benedick', 'timestamp': '2025-09-23 22:18:21', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 40}
+2025-09-23 22:18:21 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:18:21', 'author': 'benedick', 'message': 'All prompting me how fair young Hero is,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': ''}
+2025-09-23 22:18:21 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:18:25 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-23 22:18:25 | INFO | [consumer_data_git_hub] Shutdown complete.
+2025-09-23 22:18:26 | INFO | {'message': 'You should hear reason.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:18:26', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 23}
+2025-09-23 22:18:27 | WARNING | [producer_much_ado] Interrupted by user.
+2025-09-23 22:18:27 | INFO | [producer_much_ado] Kafka producer closed.
+2025-09-23 22:18:27 | INFO | [producer_much_ado] Shutting down.
+2025-09-23 22:19:55 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:19:55 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:19:55 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:19:55 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:19:55 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:19:55 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:19:55 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:19:55 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:19:55 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:19:55 | INFO | Deleted existing live data file.
+2025-09-23 22:19:55 | INFO | [producer_much_ado] Loaded 321 authors and 321 messages from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:19:55 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:19:56 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:19:56 | INFO | [producer_much_ado] Kafka producer connected to 127.0.0.1:9092
+2025-09-23 22:19:56 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:19:56 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:19:56 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:19:56 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:19:56 | INFO | [producer_much_ado] Kafka topic 'buzzline' is ready.
+2025-09-23 22:19:56 | INFO | {'message': 'That know love’s grief by his complexion!', 'author': 'benedick', 'timestamp': '2025-09-23 22:19:56', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 41}
+2025-09-23 22:20:01 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:20:01 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:20:01 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:20:01 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:20:01 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:20:01 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:20:01 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:20:01 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:20:01 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:20:01 | INFO | Deleted existing live data file.
+2025-09-23 22:20:01 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:20:01 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:20:01 | INFO | {'message': 'being a man. Truly the lady fathers herself. Be happy, lady, for you are', 'author': 'don pedro', 'timestamp': '2025-09-23 22:20:01', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 72}
+2025-09-23 22:20:01 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:20:02 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:20:02 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:20:02 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:20:02 | INFO | {'message': 'Who? the most exquisite Claudio?', 'author': 'messenger', 'timestamp': '2025-09-23 22:20:02', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 32}
+2025-09-23 22:20:06 | INFO | {'message': 'have you think so; but on my allegiance mark you this, on my allegiance:', 'author': 'beatrice', 'timestamp': '2025-09-23 22:20:06', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 72}
+2025-09-23 22:20:07 | INFO | {'message': 'I wonder that thou (being as thou say’st thou art, born', 'author': 'beatrice', 'timestamp': '2025-09-23 22:20:07', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 55}
+2025-09-23 22:20:11 | INFO | {'message': 'Cousins, you know what you have to do. O! I cry you mercy, friend; go you', 'author': 'benedick', 'timestamp': '2025-09-23 22:20:11', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:20:12 | INFO | {'message': 'take you, to go in the song?', 'author': 'benedick', 'timestamp': '2025-09-23 22:20:12', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 28}
+2025-09-23 22:20:13 | WARNING | Producer interrupted by user.
+2025-09-23 22:20:13 | INFO | Producer shutting down.
+2025-09-23 22:20:16 | INFO | Logging to file: logs/project_log.log
+2025-09-23 22:20:16 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:20:16 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:20:16 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:20:16 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:20:16 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:20:16 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:20:16 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:20:16 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:20:16 | INFO | Deleted existing live data file.
+2025-09-23 22:20:16 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:20:16 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:20:16 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:20:16 | INFO | {'message': 'Is’t possible?', 'author': 'don john', 'timestamp': '2025-09-23 22:20:16', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 14}
+2025-09-23 22:20:16 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:20:16 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:20:16 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:20:16 | INFO | {'message': 'A kind overflow of kindness. There are no faces truer than those', 'author': 'beatrice', 'timestamp': '2025-09-23 22:20:16', 'category': 'literature', 'sentiment': 0.74, 'keyword_mentioned': 'other', 'message_length': 64}
+2025-09-23 22:20:21 | INFO | {'message': 'And when I have heard it, what blessings brings it?', 'author': 'benedick', 'timestamp': '2025-09-23 22:20:21', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 51}
+2025-09-23 22:20:21 | INFO | {'message': 'I wonder that thou (being as thou say’st thou art, born', 'author': 'don pedro', 'timestamp': '2025-09-23 22:20:21', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 55}
+2025-09-23 22:20:26 | INFO | {'message': 'hath left to be known a reasonable creature. Who is his companion now? He', 'author': 'don john', 'timestamp': '2025-09-23 22:20:26', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:20:26 | INFO | {'message': 'pluck off the bull’s horns and set them in my forehead; and let me', 'author': 'don pedro', 'timestamp': '2025-09-23 22:20:26', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 66}
+2025-09-23 22:20:31 | INFO | {'message': 'Benedick, didst thou note the daughter of Signior Leonato?', 'author': 'claudio', 'timestamp': '2025-09-23 22:20:31', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 58}
+2025-09-23 22:20:36 | INFO | {'message': 'But few of any sort, and none of name.', 'author': 'conrade', 'timestamp': '2025-09-23 22:20:36', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 38}

@@ -1,357 +1,215 @@
-# consumers/consumer_data_git_hub.py
+# producers/producer_much_ado.py
 """
-Custom consumer (Kafka) that:
-- Validates (author, message) pairs against a reference corpus (Much Ado).
-- Flags messages that contain configured "flag words".
-- Writes one processed row per message to SQLite (author_validation table).
-- Emits "alerts" to console and to SQLite (alerts table) when policy matches.
-
-Run:
-  # terminal 1
-  py -m producers.producer_case
-
-  # terminal 2
-  py -m consumers.consumer_data_git_hub
+Emit random (author, message) pairs built from Much Ado reference file.
+Now with real sentiment via VADER (fallback to a tiny lexicon if missing).
 """
 
 from __future__ import annotations
 
-# stdlib
 import json
 import os
-import re
-import sqlite3
 import pathlib
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple
+import random
+import time
+from datetime import datetime
+from typing import Any, Dict, List, Tuple, Optional
 
-# external
-from kafka import KafkaConsumer
+from kafka import KafkaProducer
 
-# local
 import utils.utils_config as config
 from utils.utils_logger import logger
-from utils.utils_consumer import create_kafka_consumer
-from utils.utils_producer import verify_services
+from utils.utils_producer import verify_services, create_kafka_topic
 
-# --------------------------------------------------------------------------------------------------
-# Alert policy
-# --------------------------------------------------------------------------------------------------
-# True  = require that (author,message) exists in reference file AND keyword(s) hit
-# False = require non-empty author AND keyword(s) hit
-ALERT_ON_VALID_AUTHOR_ONLY: bool = True
-
-# --------------------------------------------------------------------------------------------------
-# File locations (adjust only if you move the shared files folder)
-# --------------------------------------------------------------------------------------------------
-
-# Reference JSON (Much Ado) candidates
-REF_FILE_CANDIDATES: List[pathlib.Path] = [
+# ---------- paths (same logic you already had) ----------
+ENV_REF = os.getenv("MUCH_ADO_PATH")
+REF_CANDIDATES: List[pathlib.Path] = []
+if ENV_REF:
+    REF_CANDIDATES.append(pathlib.Path(ENV_REF))
+REF_CANDIDATES.extend([
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_excerpt.json"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_except.json"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_execpt.json"),
-]
+])
+_PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
+for _name in ["much_ado_excerpt.json", "much_ado_except.json", "much_ado_execpt.json"]:
+    REF_CANDIDATES.append(_PROJECT_ROOT / "files" / _name)
+    REF_CANDIDATES.append(_PROJECT_ROOT / _name)
 
-# Flag words (REQUIRED for keyword alerts; no auto-derivation)
-FLAG_FILE_CANDIDATES: List[pathlib.Path] = [
-    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words.txt"),
-    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words"),
-    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words.json"),
-]
+# ---------- sentiment ----------
+_VADER = None
 
-# --------------------------------------------------------------------------------------------------
-# SQLite schema
-# --------------------------------------------------------------------------------------------------
-
-AUTHOR_VALIDATION_TABLE_SQL = """
-CREATE TABLE IF NOT EXISTS author_validation (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    src_timestamp TEXT,
-    author TEXT,
-    message TEXT,
-    author_message_valid INTEGER,
-    keyword_hit_count INTEGER,
-    keywords_hit TEXT
-);
-"""
-
-ALERTS_TABLE_SQL = """
-CREATE TABLE IF NOT EXISTS alerts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    processed_at TEXT DEFAULT (datetime('now')),
-    src_timestamp TEXT,
-    author TEXT,
-    message TEXT,
-    keyword_hit_count INTEGER,
-    keywords_hit TEXT
-);
-"""
-
-# --------------------------------------------------------------------------------------------------
-# DB helpers
-# --------------------------------------------------------------------------------------------------
-
-
-def init_db(db_path: pathlib.Path) -> None:
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    with sqlite3.connect(str(db_path)) as conn:
-        conn.execute(AUTHOR_VALIDATION_TABLE_SQL)
-        conn.execute(ALERTS_TABLE_SQL)
-        conn.commit()
-    logger.info(f"[consumer_data_git_hub] SQLite ready at {db_path}")
-
-
-def insert_row(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
-    with sqlite3.connect(str(db_path)) as conn:
-        conn.execute(
-            """
-            INSERT INTO author_validation (
-                src_timestamp, author, message, author_message_valid,
-                keyword_hit_count, keywords_hit
-            ) VALUES (?, ?, ?, ?, ?, ?);
-            """,
-            (
-                row.get("src_timestamp"),
-                row.get("author"),
-                row.get("message"),
-                int(row.get("author_message_valid", 0)),
-                int(row.get("keyword_hit_count", 0)),
-                row.get("keywords_hit", ""),
-            ),
-        )
-        conn.commit()
-    logger.info("[consumer_data_git_hub] Inserted one processed row.")
-
-
-def insert_alert(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
-    with sqlite3.connect(str(db_path)) as conn:
-        conn.execute(
-            """
-            INSERT INTO alerts (
-                src_timestamp, author, message, keyword_hit_count, keywords_hit
-            ) VALUES (?, ?, ?, ?, ?);
-            """,
-            (
-                row.get("src_timestamp"),
-                row.get("author"),
-                row.get("message"),
-                int(row.get("keyword_hit_count", 0)),
-                row.get("keywords_hit", ""),
-            ),
-        )
-        conn.commit()
-
-
-def should_alert(row: Mapping[str, Any]) -> bool:
-    """Return True if this row should generate an alert based on policy."""
-    if int(row.get("keyword_hit_count", 0)) <= 0:
-        return False
-
-    if ALERT_ON_VALID_AUTHOR_ONLY:
-        return bool(row.get("author_message_valid"))
-    else:
-        return bool(str(row.get("author", "")).strip())
-
-
-# --------------------------------------------------------------------------------------------------
-# Reference corpus (Much Ado) loader and token helpers
-# --------------------------------------------------------------------------------------------------
-
-_TOKEN_RE = re.compile(r"[A-Za-z']+")
-
-
-def _tokenize_lower(text: str) -> List[str]:
-    return [t.lower() for t in _TOKEN_RE.findall(text or "")]
-
-
-def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
-    """
-    Load the Much Ado reference JSON. Returns:
-      - a set of (author_lower, message_stripped_lower)
-      - a flat list of tokens from all messages (lowercased)  [tokens kept for potential future use]
-    """
-    ref_path: Optional[pathlib.Path] = None
-    for p in REF_FILE_CANDIDATES:
-        if p.exists():
-            ref_path = p
-            break
-
-    if not ref_path:
-        logger.warning("[consumer_data_git_hub] No reference file found; author validation will be 0.")
-        return set(), []
-
+def get_sentiment_analyzer():
+    """Try to load VADER once; else return None."""
+    global _VADER
+    if _VADER is not None:
+        return _VADER
     try:
-        raw = ref_path.read_text(encoding="utf-8")
-        data = json.loads(raw)
-        pairs: Set[Tuple[str, str]] = set()
-        tokens: List[str] = []
-        for item in data:
-            author = str(item.get("author", "")).strip().lower()
-            message = str(item.get("message", "")).strip().lower()
-            if author and message:
-                pairs.add((author, message))
-            tokens.extend(_tokenize_lower(message))
-        logger.info(f"[consumer_data_git_hub] Loaded reference pairs: {len(pairs)} from {ref_path}")
-        return pairs, tokens
+        from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+        _VADER = SentimentIntensityAnalyzer()
     except Exception as e:
-        logger.error(f"[consumer_data_git_hub] Failed to read reference file: {e}")
-        return set(), []
+        logger.warning(f"[producer_much_ado] VADER not available; using fallback lexicon. ({e})")
+        _VADER = None
+    return _VADER
 
+_POS_WORDS = {
+    "love","joy","happy","worthy","honour","honor","brave","valiant","good","sweet",
+    "kind","pleasant","merry","praise","grace","fair","fine","noble","virtue","gentle",
+}
+_NEG_WORDS = {
+    "kill","murder","villain","traitor","hate","anger","wrath","spite","malice",
+    "curse","false","deceive","poison","rage","sad","tears","mock","scorn","lie","ill",
+}
 
-# --------------------------------------------------------------------------------------------------
-# Flag words (file ONLY; no derivation)
-# --------------------------------------------------------------------------------------------------
-
-
-def load_flag_words() -> Set[str]:
+def assess_sentiment(text: str) -> float:
     """
-    Load flag words (required for alerts) from one of the known files:
-      - flag_words.txt (preferred): one word per line
-      - flag_words       (no extension): one word per line
-      - flag_words.json  (JSON array of words)
-    No auto-derivation. If not found, returns empty set.
+    Return sentiment in [0,1].
+    - Prefer VADER compound score (-1..1) mapped to 0..1.
+    - Fallback: tiny bag-of-words score.
     """
-    for p in FLAG_FILE_CANDIDATES:
+    if not text:
+        return 0.5
+    analyzer = get_sentiment_analyzer()
+    if analyzer:
+        comp = analyzer.polarity_scores(text)["compound"]  # -1..1
+        return round((comp + 1.0) / 2.0, 2)                # -> 0..1
+    # Fallback heuristic
+    toks = [t.lower() for t in text.split()]
+    pos = sum(t in _POS_WORDS for t in toks)
+    neg = sum(t in _NEG_WORDS for t in toks)
+    score = 0.5
+    if pos or neg:
+        score = 0.5 + (pos - neg) / max(2, (pos + neg) * 2)  # dampen
+    return round(min(1.0, max(0.0, score)), 2)
+
+# ---------- data loading ----------
+def _find_first_existing(paths: List[pathlib.Path]) -> Optional[pathlib.Path]:
+    for p in paths:
         if p.exists():
-            try:
-                if p.suffix.lower() == ".json":
-                    words = set(json.loads(p.read_text(encoding="utf-8")))
-                else:
-                    words = {
-                        w.strip().lower()
-                        for w in p.read_text(encoding="utf-8").splitlines()
-                        if w.strip()
-                    }
-                if words:
-                    logger.info(f"[consumer_data_git_hub] Loaded {len(words)} flag words from {p}")
-                    return words
-            except Exception as e:
-                logger.warning(f"[consumer_data_git_hub] Could not read flag words from {p}: {e}")
+            return p
+    return None
 
-    logger.warning(
-        "[consumer_data_git_hub] No flag words file found; keyword alerts will never trigger."
-    )
-    return set()
+def load_much_ado() -> List[Dict[str, str]]:
+    ref = _find_first_existing(REF_CANDIDATES)
+    if not ref:
+        logger.error("[producer_much_ado] Could not find much_ado_excerpt JSON in any known location.")
+        logger.error("[producer_much_ado] Paths tried:")
+        for p in REF_CANDIDATES:
+            logger.error(f"  - {p}")
+        return []
+    try:
+        return json.loads(ref.read_text(encoding="utf-8"))
+    except Exception as e:
+        logger.error(f"[producer_much_ado] Failed reading reference file {ref}: {e}")
+        return []
 
+def build_pools(data: List[Dict[str, str]]) -> Tuple[List[str], List[str]]:
+    authors = []
+    messages = []
+    for item in data:
+        a = str(item.get("author", "")).strip()
+        m = str(item.get("message", "")).strip()
+        if a:
+            authors.append(a)
+        if m:
+            messages.append(m)
+    return authors, messages
 
-# --------------------------------------------------------------------------------------------------
-# Per-message processing
-# --------------------------------------------------------------------------------------------------
-
-
-def validate_author_message(
-    author: str,
-    message: str,
-    ref_pairs: Set[Tuple[str, str]],
-) -> bool:
-    """
-    Exact match on (author_lower, message_lower) against the reference set.
-    """
-    a = (author or "").strip().lower()
-    m = (message or "").strip().lower()
-    return (a, m) in ref_pairs
-
-
-def count_keyword_hits(message: str, flag_words: Set[str]) -> Tuple[int, str]:
-    """
-    Count keyword hits; returns (count, comma_separated_keywords_hit).
-    """
-    if not message or not flag_words:
-        return 0, ""
-    toks = set(_tokenize_lower(message))
-    hits = sorted(list(toks.intersection(flag_words)))
-    return (len(hits), ", ".join(hits))
-
-
-def process_message(
-    payload: Mapping[str, Any],
-    ref_pairs: Set[Tuple[str, str]],
-    flag_words: Set[str],
-) -> Dict[str, Any]:
-    """
-    Transform one incoming JSON message into a stored row structure.
-    """
-    author = str(payload.get("author", "")).strip()
-    message = str(payload.get("message", "")).strip()
-    ts = str(payload.get("timestamp", ""))
-
-    valid = validate_author_message(author, message, ref_pairs)
-    kw_count, kw_list = count_keyword_hits(message, flag_words)
-
-    row = {
-        "src_timestamp": ts,
-        "author": author,
-        "message": message,
-        "author_message_valid": int(valid),
-        "keyword_hit_count": int(kw_count),
-        "keywords_hit": kw_list,
-    }
-    logger.info(f"[consumer_data_git_hub] Processed row: {row}")
-    return row
-
-
-# --------------------------------------------------------------------------------------------------
-# Main (Kafka mode)
-# --------------------------------------------------------------------------------------------------
-
+# ---------- emitters ----------
+def emit_to_file(message: Dict[str, Any], path: pathlib.Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(message, ensure_ascii=False) + "\n")
 
 def main() -> None:
-    logger.info("[consumer_data_git_hub] Starting (Kafka mode).")
+    logger.info("Starting Much Ado Producer (random author + random message).")
+    logger.info("Use Ctrl+C to stop.")
 
-    # Read config
+    interval = config.get_message_interval_seconds_as_int()
     topic = config.get_kafka_topic()
-    group_id = config.get_kafka_consumer_group_id()
-    sqlite_path = config.get_sqlite_path()
+    kafka_server = config.get_kafka_broker_address()
+    live_data_path = config.get_live_data_path()
 
-    # Prepare DB
-    init_db(sqlite_path)
-
-    # Load reference and flag words
-    ref_pairs, _ = load_reference_pairs_and_tokens()
-    flag_words = load_flag_words()
-
-    # Verify Kafka up (soft)
+    # Reset file sink
     try:
-        verify_services(strict=False)
+        if live_data_path.exists():
+            live_data_path.unlink()
+        logger.info("Deleted existing live data file.")
+    except Exception:
+        pass
+
+    # Load data
+    data = load_much_ado()
+    if not data:
+        logger.error("[producer_much_ado] No data to emit. Exiting.")
+        return
+
+    authors, messages = build_pools(data)
+    if not authors or not messages:
+        logger.error("[producer_much_ado] Reference file didn’t yield authors/messages. Exiting.")
+        return
+
+    # Kafka (soft)
+    producer = None
+    try:
+        if verify_services(strict=False):
+            producer = KafkaProducer(bootstrap_servers=kafka_server)
+            try:
+                create_kafka_topic(topic)
+            except Exception:
+                pass
     except Exception as e:
-        logger.warning(f"[consumer_data_git_hub] Kafka verify warning: {e}")
+        logger.warning(f"[producer_much_ado] Kafka setup warning: {e}")
+        producer = None
 
-    # Create Kafka consumer
-    consumer: KafkaConsumer = create_kafka_consumer(
-        topic_provided=topic,
-        group_id_provided=group_id,
-        value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
-    )
-
-    logger.info("[consumer_data_git_hub] Polling for messages...")
     try:
-        for msg in consumer:
-            payload = msg.value  # already deserialized dict
-            row = process_message(payload, ref_pairs, flag_words)
-            insert_row(sqlite_path, row)
+        while True:
+            author = random.choice(authors)
+            message = random.choice(messages)
+            ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            # Alert policy
-            if should_alert(row):
-                insert_alert(sqlite_path, row)
-                logger.warning(
-                    "[ALERT] ts=%s author=%s hits=%s [%s] :: %s",
-                    row["src_timestamp"],
-                    row["author"],
-                    row["keyword_hit_count"],
-                    row["keywords_hit"],
-                    (row["message"][:140] + "…") if len(row["message"]) > 150 else row["message"],
-                )
+            # compute real sentiment
+            sentiment = assess_sentiment(message)
+
+            # crude category/keyword_mentioned to keep schema stable
+            keyword = "other"
+            lower = message.lower()
+            if any(w in lower for w in ("kill","murder","poison")):
+                keyword = "violence"
+            elif any(w in lower for w in ("love","joy","happy")):
+                keyword = "affection"
+            elif any(w in lower for w in ("honour","noble","virtue","grace")):
+                keyword = "virtue"
+
+            out = {
+                "message": message,
+                "author": author,
+                "timestamp": ts,
+                "category": "literature",
+                "sentiment": sentiment,              # <-- now real
+                "keyword_mentioned": keyword,
+                "message_length": len(message),
+            }
+
+            # file sink (JSONL)
+            emit_to_file(out, live_data_path)
+            # kafka sink
+            if producer:
+                payload = json.dumps(out, ensure_ascii=False).encode("utf-8")
+                producer.send(topic, value=payload)
+
+            logger.info(out)
+            time.sleep(interval)
+
     except KeyboardInterrupt:
-        logger.warning("[consumer_data_git_hub] Interrupted by user.")
-    except Exception as e:
-        logger.error(f"[consumer_data_git_hub] Runtime error: {e}")
-        raise
+        logger.warning("Producer interrupted by user.")
     finally:
-        logger.info("[consumer_data_git_hub] Shutdown complete.")
-
-
-# --------------------------------------------------------------------------------------------------
-# Conditional execution
-# --------------------------------------------------------------------------------------------------
+        try:
+            if producer:
+                producer.flush(timeout=5)
+                producer.close()
+        except Exception:
+            pass
+        logger.info("Producer shutting down.")
 
 if __name__ == "__main__":
     main()

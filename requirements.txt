@@ -159,3 +159,6 @@ duckdb
 # - Needed if DATABASE_TYPE=mysql.
 # Uncomment the line below to install PyMySQL.
 # PyMySQL
+
+# Sentiment value add
+vaderSentiment
