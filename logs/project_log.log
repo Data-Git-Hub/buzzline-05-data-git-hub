@@ -236,3 +236,70 @@
 2025-09-23 20:26:50 | WARNING | Producer interrupted by user.
 2025-09-23 20:26:50 | INFO | Kafka producer closed.
 2025-09-23 20:26:50 | INFO | Producer shutting down.
+2025-09-23 21:42:34 | INFO | Logging to file: logs/project_log.log
+2025-09-23 21:42:34 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 21:42:34 | INFO | Starting Producer to run continuously.
+2025-09-23 21:42:34 | INFO | Use Ctrl+C to stop.
+2025-09-23 21:42:34 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 21:42:34 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 21:42:34 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 21:42:34 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 21:42:34 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 21:42:34 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 21:42:34 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 21:42:34 | INFO | Deleted existing live data file.
+2025-09-23 21:42:34 | INFO | Kafka broker address: localhost:9092
+2025-09-23 21:42:34 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 21:42:34 | INFO | Kafka producer connected to 127.0.0.1:9092
+2025-09-23 21:42:34 | INFO | Kafka broker address: localhost:9092
+2025-09-23 21:42:35 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 21:42:35 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 21:42:35 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 21:42:35 | INFO | Kafka topic 'buzzline' is ready.
+2025-09-23 21:42:35 | INFO | {'message': 'I just found game! It was weird.', 'author': 'Bob', 'timestamp': '2025-09-23 21:42:35', 'category': 'gaming', 'sentiment': 0.14, 'keyword_mentioned': 'game', 'message_length': 32}
+2025-09-23 21:42:40 | INFO | {'message': 'I just loved JavaScript! It was amazing.', 'author': 'Alice', 'timestamp': '2025-09-23 21:42:40', 'category': 'tech', 'sentiment': 0.57, 'keyword_mentioned': 'JavaScript', 'message_length': 40}
+2025-09-23 21:42:45 | INFO | {'message': 'I just loved a movie! It was amazing.', 'author': 'Bob', 'timestamp': '2025-09-23 21:42:45', 'category': 'entertainment', 'sentiment': 0.61, 'keyword_mentioned': 'movie', 'message_length': 37}
+2025-09-23 21:42:50 | INFO | {'message': 'I just found Python! It was exciting.', 'author': 'Alice', 'timestamp': '2025-09-23 21:42:50', 'category': 'tech', 'sentiment': 0.65, 'keyword_mentioned': 'Python', 'message_length': 37}
+2025-09-23 21:42:54 | INFO | Logging to file: logs/project_log.log
+2025-09-23 21:42:54 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 21:42:54 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 21:42:54 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 21:42:54 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 21:42:54 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 21:42:54 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 21:42:54 | INFO | [consumer_data_git_hub] SQLite ready at %s
+2025-09-23 21:42:54 | WARNING | [consumer_data_git_hub] No reference file found; author validation will be 0.
+2025-09-23 21:42:54 | WARNING | [consumer_data_git_hub] No flag words file found; keyword hits will be 0.
+2025-09-23 21:42:54 | INFO | Kafka broker address: localhost:9092
+2025-09-23 21:42:54 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 21:42:54 | INFO | Kafka consumer created successfully.
+2025-09-23 21:42:54 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 21:42:55 | INFO | {'message': 'I just shared Python! It was amazing.', 'author': 'Bob', 'timestamp': '2025-09-23 21:42:55', 'category': 'tech', 'sentiment': 0.03, 'keyword_mentioned': 'Python', 'message_length': 37}
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:42:57 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:00 | INFO | {'message': 'I just tried JavaScript! It was weird.', 'author': 'Charlie', 'timestamp': '2025-09-23 21:43:00', 'category': 'tech', 'sentiment': 0.9, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 21:43:00 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:43:00 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:05 | INFO | {'message': 'I just saw Python! It was boring.', 'author': 'Charlie', 'timestamp': '2025-09-23 21:43:05', 'category': 'tech', 'sentiment': 0.78, 'keyword_mentioned': 'Python', 'message_length': 33}
+2025-09-23 21:43:05 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:43:05 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:10 | INFO | {'message': 'I just saw a story! It was funny.', 'author': 'Eve', 'timestamp': '2025-09-23 21:43:10', 'category': 'other', 'sentiment': 0.83, 'keyword_mentioned': 'other', 'message_length': 33}
+2025-09-23 21:43:10 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:43:10 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:15 | INFO | {'message': 'I just shared a movie! It was exciting.', 'author': 'Bob', 'timestamp': '2025-09-23 21:43:15', 'category': 'entertainment', 'sentiment': 0.55, 'keyword_mentioned': 'movie', 'message_length': 39}
+2025-09-23 21:43:15 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:43:15 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:20 | INFO | {'message': 'I just loved a meme! It was weird.', 'author': 'Eve', 'timestamp': '2025-09-23 21:43:20', 'category': 'humor', 'sentiment': 0.91, 'keyword_mentioned': 'meme', 'message_length': 34}
+2025-09-23 21:43:20 | INFO | [consumer_data_git_hub] Processed row: %s
+2025-09-23 21:43:20 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 21:43:20 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-23 21:43:20 | INFO | [consumer_data_git_hub] Shutdown complete.
+2025-09-23 21:43:23 | WARNING | Producer interrupted by user.
+2025-09-23 21:43:23 | INFO | Kafka producer closed.
+2025-09-23 21:43:23 | INFO | Producer shutting down.
