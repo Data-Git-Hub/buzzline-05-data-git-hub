@@ -346,5 +346,67 @@ See the [LICENSE](LICENSE.txt) file for more.
 - WSL by Microsoft (on Windows Machines)
 
 
-## P5: Database Integration with Streaming Pipelines
+# P5: Database Integration with Streaming Pipelines
 
+## Introduction
+In this project, 
+
+
+## Tasks
+1. Clone / open the project in VS Code.
+2. Create & activate a Python 3.11 virtual environment.
+3. Install dependencies from requirements.txt.
+4. ....
+
+
+## Requirements
+
+- Python 3.11
+- A local virtual environment (`.venv`)
+- Packages from `requirements.txt`:
+- `matplotlib`, `websocket-client`, `requests`, and `python-dotenv`  *** Need to change for this project ***
+
+
+## Windows Setup Instructions
+```shell
+# 1) In VS Code terminal (PowerShell), from the project root:
+py -3.11 -m venv .venv
+.\.venv\Scripts\activate
+```
+
+# 2) Upgrade tools and install project deps
+```shell
+py -m pip install --upgrade pip setuptools wheel
+py -m pip install --upgrade -r requirements.txt
+```
+
+## macOS/Linux Setup Instructions
+```bash
+# 1) In the project root:
+python3.11 -m venv .venv || python3 -m venv .venv
+source .venv/bin/activate
+```
+
+# 2) Upgrade tools and install project deps
+```bash
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install --upgrade -r requirements.txt
+```
+
+
+## Troubleshooting
+
+
+## Authors
+
+Contributors names and contact info <br>
+@github.com/Data-Git-Hub <br>
+
+---
+
+## Version History
+- P5 Main 1.1 | Modify README.md
+- P5 Main 1.0 | Modify README.md
+
+
+## Test History
