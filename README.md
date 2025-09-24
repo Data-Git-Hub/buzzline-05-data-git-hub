@@ -348,54 +348,83 @@ See the [LICENSE](LICENSE.txt) file for more.
 
 # P5: Database Integration with Streaming Pipelines
 
+
 ## Introduction
-In this project, 
+In this project, my custom consumer (`consumers/consumer_data_git_hub.py`) reads live JSON events from the Kafka topic `buzzline` and processes each message individually as it arrives. For every record it (1) validates the exact (author, message) pair against a reference corpus built from files/much_ado_excerpt.json, (2) scans the message for “flag words” loaded from `files/flag_words.txt` (Shakespearean, negative/ill-will terms), and (3) checks whether the author appears in `files/bad_authors.txt`. The consumer persists a compact, per-message result into SQLite (`data/buzz.sqlite`, table `author_validation`) including the source timestamp, author, message, author-match boolean, keyword hit count and list, and a `bad_author_flag`. When a message meets the alert policy (configurable via env vars `ALERT_ON_VALID_AUTHOR_ONLY` and `ALERT_KEYWORD_MIN`), it also writes an entry to the `alerts` table and emits a console warning. The reference/flag/bad-author files and the DB path are auto-discovered under `PROJECT_ROOT/files` and `PROJECT_ROOT/data` (via the existing utils config), and the consumer is idempotent and append-only—no need to drop the database between runs.
 
 
 ## Tasks
 1. Clone / open the project in VS Code.
 2. Create & activate a Python 3.11 virtual environment.
 3. Install dependencies from requirements.txt.
-4. ....
-
+4. Create the files folder & place data assets
+   C:\Projects\buzzline-05-data-git-hub\files\much_ado_excerpt.json (your provided JSON)
+   C:\Projects\buzzline-05-data-git-hub\files\flag_words.txt (negative/ill-will words)
+   C:\Projects\buzzline-05-data-git-hub\files\bad_authors.txt (one author per line)
+5. (Optional) Create a .env at project root
+   If you want to tweak behavior without editing code:
+```shell
+   KAFKA_BROKER_ADDRESS=127.0.0.1:9092
+BUZZ_TOPIC=buzzline
+BUZZ_CONSUMER_GROUP_ID=buzz_group
+MESSAGE_INTERVAL_SECONDS=5
+ALERT_ON_VALID_AUTHOR_ONLY=False
+ALERT_KEYWORD_MIN=1
+```
+(If you don’t use .env, defaults in utils_config apply.)
+6. Start Kafka/ZooKeeper (if not already running)
+   - Make sure your local Kafka broker is up on 127.0.0.1:9092.
+7. Run the producer (Much Ado random author + random message)
+```shell
+# from project root
+py -m producers.producer_much_ado
+```
+You should see logs like:
+```shell
+Starting Much Ado Producer (random author + random message).
+{'message': '...', 'author': '...', 'timestamp': '...'}
+```
+8. Run the consumer (in a second terminal)
+```shell
+py -m consumers.consumer_data_git_hub
+```
+You should see:
+   - DB path confirmation: ... Using SQLite at: PROJECT_ROOT/data/buzz.sqlite
+   - Reference/flag/bad-author loads from PROJECT_ROOT/files/...
+   - “Processed row” logs for each message
+   - If an alert triggers, a [ALERT] ... warning and a row in the alerts table
+9. Verify SQLite outputs
+   - DB file: C:\Projects\buzzline-05-data-git-hub\data\buzz.sqlite
+   - Tables:
+      - author_validation (one row per message)
+      - alerts (rows only when policy matches)
+   - Quick check (use any SQLite browser) and confirm new rows append on each run (the consumer does not drop tables).
+10. README.md updates
+   - Document how to run:
+     - Producer: py -m producers.producer_much_ado
+     - Consumer: py -m consumers.consumer_data_git_hub
+   - Explain the insight: author/message validation, flag word hits, bad-author flag, and alert policy.
+   - Note the file paths you placed under /files and the DB under /data.
+11. Git workflow
+```shell
+git add .
+git commit -m "Add custom consumer, producer_much_ado, flag/bad-author files, and README updates"
+git push origin <your-branch-or-main>
+```
 
 ## Requirements
 
 - Python 3.11
-- A local virtual environment (`.venv`)
-- Packages from `requirements.txt`:
-- `matplotlib`, `websocket-client`, `requests`, and `python-dotenv`  *** Need to change for this project ***
-
-
-## Windows Setup Instructions
+- A local virtual environment (.venv)
+- Install dependencies
 ```shell
-# 1) In VS Code terminal (PowerShell), from the project root:
-py -3.11 -m venv .venv
-.\.venv\Scripts\activate
+pip install -r requirements.txt
 ```
-
-# 2) Upgrade tools and install project deps
-```shell
-py -m pip install --upgrade pip setuptools wheel
-py -m pip install --upgrade -r requirements.txt
-```
-
-## macOS/Linux Setup Instructions
-```bash
-# 1) In the project root:
-python3.11 -m venv .venv || python3 -m venv .venv
-source .venv/bin/activate
-```
-
-# 2) Upgrade tools and install project deps
-```bash
-python3 -m pip install --upgrade pip setuptools wheel
-python3 -m pip install --upgrade -r requirements.txt
-```
-
 
 ## Troubleshooting
-
+   - No rows in `alerts`: ensure `flag_words.txt` exists and `ALERT_KEYWORD_MIN=1`. If `ALERT_ON_VALID_AUTHOR_ONLY=True`, alerts require BOTH a keyword hit and a valid `(author,message)` pair from `much_ado_excerpt.json`.
+   - Old DB schema: if you previously ran before we added columns, the consumer will auto-migrate columns on start. If you see schema errors, stop both apps, close any DB viewers (to release SQLite locks), then rerun the consumer.
+   - Windows log file locks: Each process writes its own log: `logs/project_log_<PID>.log.` That avoids rename/rotation conflicts.
 
 ## Authors
 
@@ -405,6 +434,7 @@ Contributors names and contact info <br>
 ---
 
 ## Version History
+- P5 Main 3.1 | Modify README.md
 - P5 Main 3.1 | Modify consumer_data_git_hub.py, README.md 
 - P5 Main 3.0 | Add bad_author.txt; Modify consumer_data_git_hub.py - add ability to track bad authors and add to database, README.md
 - P5 Main 2.3 | Modify consumer_data_git_hub.py, README.md
