@@ -405,6 +405,8 @@ Contributors names and contact info <br>
 ---
 
 ## Version History
+- P5 Main 2.2 | Modify multiple files in app.
+- P5 Main 2.1 | Modify consumer_data_git_hub.py, README.md
 - P5 Main 2.0 | Modify requirements.txt - add vaderSentiment for sentiment value scores, consumer_data_git_hub.py, README.md
 - P5 Main 1.7 | Modify much_ado_excerpt.json, producer_much_ado.py, README.md
 - P5 Main 1.6 | Modify consumer_data_git_hub.py, README.md

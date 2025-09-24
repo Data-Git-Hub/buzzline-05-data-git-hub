@@ -1,0 +1,8 @@
+2025-09-23 22:57:30 | INFO | Logging to file: logs/project_log_5196.log
+2025-09-23 22:57:30 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:57:30 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 22:57:30 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:57:30 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 22:57:30 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:57:30 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:57:30 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite

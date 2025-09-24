@@ -1,0 +1,90 @@
+2025-09-23 22:44:46 | INFO | Logging to file: logs/project_log_32432.log
+2025-09-23 22:44:46 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:44:46 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 22:44:46 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:44:46 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 22:44:46 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:44:46 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:44:46 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 22:44:46 | INFO | [consumer_data_git_hub] Loaded reference pairs: 321 from PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 22:44:46 | INFO | [consumer_data_git_hub] Loaded 42 flag words from PROJECT_ROOT/files/flag_words.txt
+2025-09-23 22:44:46 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:44:46 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:44:46 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:44:46 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 22:44:46 | INFO | Kafka consumer created successfully.
+2025-09-23 22:44:46 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 22:44:49 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:44:44', 'author': 'benedick', 'message': 'skirmish of wit between them.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:44:49 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:44:49 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:44:49', 'author': 'benedick', 'message': 'flight; and my uncle’s fool, reading the challenge, subscribed for', 'author_message_valid': 0, 'keyword_hit_count': 1, 'keywords_hit': 'challenge'}
+2025-09-23 22:44:49 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:44:54 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:44:54', 'author': 'benedick', 'message': 'subdued. Would the cook were of my mind! Shall we go to prove what’s', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:44:54 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:44:59 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:44:59', 'author': 'benedick', 'message': 'professed tyrant to their sex?', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:44:59 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:04 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:04', 'author': 'leonato', 'message': 'I would have salv’d it with a longer treatise.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:04 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:09 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:09', 'author': 'benedick', 'message': 'God keep your Ladyship still in that mind; so some gentleman or', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:09 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:14 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:14', 'author': 'benedick', 'message': 'I looked upon her with a soldier’s eye,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:14 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:19 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:19', 'author': 'claudio', 'message': 'I will assume thy part in some disguise,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:19 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:24 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:24', 'author': 'benedick', 'message': 'me behind the arras, and there heard it agreed upon that the Prince should', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:24 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:29 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:29', 'author': 'messenger', 'message': 'I have already delivered him letters, and there appears much', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:29 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:34 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:34', 'author': 'leonato', 'message': 'may see Benedick the married man.’', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:34 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:39 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:39', 'author': 'don pedro', 'message': 'And the conclusion is, she shall be thine.', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:39 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:44 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:44', 'author': 'leonato', 'message': 'it.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:44 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:49 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:49', 'author': 'don pedro', 'message': 'In practice let us put it presently.', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:49 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:54 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:54', 'author': 'claudio', 'message': 'If thou dost love fair Hero, cherish it,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:54 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:45:59 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:45:59', 'author': 'antonio', 'message': 'smile at no man’s jests; eat when I have stomach, and wait for no', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:45:59 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:04 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:04', 'author': 'leonato', 'message': 'With anger, with sickness, or with hunger, my lord; not with', 'author_message_valid': 0, 'keyword_hit_count': 1, 'keywords_hit': 'anger'}
+2025-09-23 22:46:04 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:09 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:09', 'author': 'messenger', 'message': 'detain us longer: I dare swear he is no hypocrite, but prays from his', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:09 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:14 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:14', 'author': 'benedick', 'message': 'humour for that. I had rather hear my dog bark at a crow than a man swear', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:14 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:19 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:19', 'author': 'beatrice', 'message': 'short his answer is: with Hero, Leonato’s short daughter.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:19 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:24 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:24', 'author': 'leonato', 'message': 'being a man. Truly the lady fathers herself. Be happy, lady, for you are', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:24 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:29 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:29', 'author': 'beatrice', 'message': 'he is in love. With who? now that is your Grace’s part. Mark how', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:29 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:34 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:34', 'author': 'conrade', 'message': 'die in it at the stake.', 'author_message_valid': 0, 'keyword_hit_count': 1, 'keywords_hit': 'die'}
+2025-09-23 22:46:34 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:39 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:39', 'author': 'beatrice', 'message': 'And I will fit thee with the remedy.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:39 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:44 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:44', 'author': 'messenger', 'message': 'A kind overflow of kindness. There are no faces truer than those', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:44 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:49 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:49', 'author': 'leonato', 'message': 'killed and eaten in these wars? But how many hath he killed? for, indeed,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:49 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:54 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:54', 'author': 'benedick', 'message': 'weeping!', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:54 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:46:59 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:46:59', 'author': 'benedick', 'message': 'And a good soldier too, lady.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:46:59 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:04 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:04', 'author': 'beatrice', 'message': 'be vilely painted, and in such great letters as they write, ‘Here is', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:04 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:09 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:09', 'author': 'messenger', 'message': 'your daughter.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:09 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:14 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:14', 'author': 'messenger', 'message': 'it.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:14 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:19 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:19', 'author': 'conrade', 'message': 'killed and eaten in these wars? But how many hath he killed? for, indeed,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:19 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:24 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:24', 'author': 'leonato', 'message': 'would bite; if I had my liberty, I would do my liking: in the meantime,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:24 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:29 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:29', 'author': 'messenger', 'message': 'Balthasar and Others.', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:29 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:34 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:34', 'author': 'don pedro', 'message': 'And the conclusion is, she shall be thine.', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:34 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:39 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 22:47:39', 'author': 'beatrice', 'message': 'subdued. Would the cook were of my mind! Shall we go to prove what’s', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': None}
+2025-09-23 22:47:39 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 22:47:42 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-23 22:47:42 | INFO | [consumer_data_git_hub] Shutdown complete.

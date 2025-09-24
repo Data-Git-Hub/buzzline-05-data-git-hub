@@ -1,0 +1,11 @@
+2025-09-23 22:32:58 | INFO | Logging to file: logs/project_log_37064.log
+2025-09-23 22:32:58 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:32:58 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:32:58 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:32:58 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:32:58 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:32:58 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:32:58 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:32:58 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:32:58 | ERROR | [producer_much_ado] Could not find much_ado_excerpt JSON in any known location.
+2025-09-23 22:32:58 | ERROR | [producer_much_ado] No data to emit. Exiting.

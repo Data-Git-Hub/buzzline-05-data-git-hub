@@ -1,0 +1,67 @@
+2025-09-23 22:24:59 | INFO | Logging to file: logs/project_log_23780.log
+2025-09-23 22:24:59 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:24:59 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:24:59 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:24:59 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:24:59 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:24:59 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:24:59 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:24:59 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:24:59 | INFO | Deleted existing live data file.
+2025-09-23 22:24:59 | INFO | [producer_much_ado] Loaded 321 authors and 321 messages from PROJECT_ROOT/much_ado_excerpt.json
+2025-09-23 22:24:59 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:24:59 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:24:59 | INFO | [producer_much_ado] Kafka producer connected to 127.0.0.1:9092
+2025-09-23 22:24:59 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:25:00 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:25:00 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:25:00 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:25:00 | INFO | [producer_much_ado] Kafka topic 'buzzline' is ready.
+2025-09-23 22:25:00 | INFO | {'message': 'That I neither feel how she should be loved, nor know how she', 'author': 'benedick', 'timestamp': '2025-09-23 22:25:00', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:25:05 | INFO | {'message': 'sorrow abides and happiness takes his leave.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:25:05', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 44}
+2025-09-23 22:25:10 | INFO | {'message': 'I look for an earthquake too then.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:25:10', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 34}
+2025-09-23 22:25:15 | INFO | {'message': 'Do you question me, as an honest man should do, for my simple', 'author': 'benedick', 'timestamp': '2025-09-23 22:25:15', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:25:20 | INFO | {'message': 'caught than the pestilence, and the taker runs presently mad. God help the', 'author': 'claudio', 'timestamp': '2025-09-23 22:25:20', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:25:25 | INFO | {'message': 'Is’t come to this, in faith? Hath not the world one', 'author': 'beatrice', 'timestamp': '2025-09-23 22:25:25', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 51}
+2025-09-23 22:25:30 | INFO | {'message': 'How sweetly you do minister to love,', 'author': 'don pedro', 'timestamp': '2025-09-23 22:25:30', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 36}
+2025-09-23 22:25:35 | INFO | {'message': 'I noted her not; but I looked on her.', 'author': 'leonato', 'timestamp': '2025-09-23 22:25:35', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 37}
+2025-09-23 22:25:40 | INFO | {'message': 'He hath done good service, lady, in these wars.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:25:40', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 47}
+2025-09-23 22:25:45 | INFO | {'message': 'That a woman conceived me, I thank her; that she brought me up,', 'author': 'claudio', 'timestamp': '2025-09-23 22:25:45', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:25:50 | INFO | {'message': 'Benedick, my dear friend Leonato hath invited you all. I tell him we shall', 'author': 'benedick', 'timestamp': '2025-09-23 22:25:50', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:25:55 | INFO | {'message': 'Have left their places vacant, in their rooms', 'author': 'don john', 'timestamp': '2025-09-23 22:25:55', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 45}
+2025-09-23 22:26:00 | INFO | {'message': 'flight; and my uncle’s fool, reading the challenge, subscribed for', 'author': 'benedick', 'timestamp': '2025-09-23 22:26:00', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 66}
+2025-09-23 22:26:05 | INFO | {'message': 'And in faith, my lord, I spoke mine.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:26:05', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 36}
+2025-09-23 22:26:10 | INFO | {'message': 'I charge thee on thy allegiance.', 'author': 'claudio', 'timestamp': '2025-09-23 22:26:10', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 32}
+2025-09-23 22:26:15 | INFO | {'message': 'Thou wast ever an obstinate heretic in the despite of beauty.', 'author': 'antonio', 'timestamp': '2025-09-23 22:26:15', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:26:20 | INFO | {'message': 'ladies, only you excepted; and I would I could find in my heart that I had', 'author': 'don pedro', 'timestamp': '2025-09-23 22:26:20', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:26:25 | INFO | {'message': 'Who? the most exquisite Claudio?', 'author': 'don pedro', 'timestamp': '2025-09-23 22:26:25', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 32}
+2025-09-23 22:26:30 | INFO | {'message': 'What! my dear Lady Disdain, are you yet living?', 'author': 'don john', 'timestamp': '2025-09-23 22:26:30', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 47}
+2025-09-23 22:26:35 | INFO | {'message': 'No child but Hero; she’s his only heir. Dost thou affect her, Claudio?', 'author': 'beatrice', 'timestamp': '2025-09-23 22:26:35', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 70}
+2025-09-23 22:26:40 | INFO | {'message': 'I know we shall have revelling tonight:', 'author': 'antonio', 'timestamp': '2025-09-23 22:26:40', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 39}
+2025-09-23 22:26:45 | INFO | {'message': 'an answer, if peradventure this be true. Go you and tell her of it.', 'author': 'antonio', 'timestamp': '2025-09-23 22:26:45', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 67}
+2025-09-23 22:26:50 | INFO | {'message': 'that if he have wit enough to keep himself warm, let him bear it for a', 'author': 'don pedro', 'timestamp': '2025-09-23 22:26:50', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 70}
+2025-09-23 22:26:55 | INFO | {'message': 'this music?', 'author': 'leonato', 'timestamp': '2025-09-23 22:26:55', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 11}
+2025-09-23 22:27:00 | INFO | {'message': 'alley in my orchard, were thus much overheard by a man of mine: the Prince', 'author': 'claudio', 'timestamp': '2025-09-23 22:27:00', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:27:05 | INFO | {'message': 'You hear, Count Claudio: I can be secret as a dumb man; I would', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:05', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:27:10 | INFO | {'message': 'No; and he were, I would burn my study. But I pray you, who is', 'author': 'messenger', 'timestamp': '2025-09-23 22:27:10', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 62}
+2025-09-23 22:27:15 | INFO | {'message': 'In practice let us put it presently.', 'author': 'leonato', 'timestamp': '2025-09-23 22:27:15', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 36}
+2025-09-23 22:27:20 | INFO | {'message': 'God keep your Ladyship still in that mind; so some gentleman or', 'author': 'beatrice', 'timestamp': '2025-09-23 22:27:20', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:27:25 | INFO | {'message': 'Did he break out into tears?', 'author': 'don john', 'timestamp': '2025-09-23 22:27:25', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 28}
+2025-09-23 22:27:30 | INFO | {'message': 'O Lord, he will hang upon him like a disease: he is sooner', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:30', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 58}
+2025-09-23 22:27:35 | INFO | {'message': 'Don Pedro is approached.', 'author': 'claudio', 'timestamp': '2025-09-23 22:27:35', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 24}
+2025-09-23 22:27:40 | INFO | {'message': 'I commit you—', 'author': 'benedick', 'timestamp': '2025-09-23 22:27:40', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 13}
+2025-09-23 22:27:45 | INFO | {'message': 'You had musty victual, and he hath holp to eat it; he is a very', 'author': 'don john', 'timestamp': '2025-09-23 22:27:45', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:27:50 | INFO | {'message': 'And when I have heard it, what blessings brings it?', 'author': 'leonato', 'timestamp': '2025-09-23 22:27:50', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 51}
+2025-09-23 22:27:55 | INFO | {'message': 'That she is worthy, I know.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:55', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 27}
+2025-09-23 22:28:00 | INFO | {'message': 'I likewise give her most humble thanks; but that I will have a recheat', 'author': 'antonio', 'timestamp': '2025-09-23 22:28:00', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 70}
+2025-09-23 22:28:05 | INFO | {'message': 'I promised to eat all of his killing.', 'author': 'benedick', 'timestamp': '2025-09-23 22:28:05', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 37}
+2025-09-23 22:28:10 | INFO | {'message': 'stuffing,—well, we are all mortal.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:28:10', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 34}
+2025-09-23 22:28:15 | INFO | {'message': 'You should hear reason.', 'author': 'don john', 'timestamp': '2025-09-23 22:28:15', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 23}
+2025-09-23 22:28:20 | INFO | {'message': 'We’ll wait upon your Lordship.', 'author': 'claudio', 'timestamp': '2025-09-23 22:28:20', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 30}
+2025-09-23 22:28:25 | INFO | {'message': 'Much deserved on his part, and equally remembered by Don Pedro.', 'author': 'leonato', 'timestamp': '2025-09-23 22:28:25', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:28:30 | INFO | {'message': 'neck into a yoke, wear the print of it and sigh away Sundays.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:28:30', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:28:35 | INFO | {'message': 'carriage to rob love from any: in this, though I cannot be said to be a', 'author': 'benedick', 'timestamp': '2025-09-23 22:28:35', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:28:40 | INFO | {'message': 'Nay, if Cupid have not spent all his quiver in Venice, thou', 'author': 'leonato', 'timestamp': '2025-09-23 22:28:40', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'other', 'message_length': 59}
+2025-09-23 22:28:43 | WARNING | [producer_much_ado] Interrupted by user.
+2025-09-23 22:28:43 | INFO | [producer_much_ado] Kafka producer closed.
+2025-09-23 22:28:43 | INFO | [producer_much_ado] Shutting down.

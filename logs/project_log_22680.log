@@ -1,0 +1,61 @@
+2025-09-23 22:25:05 | INFO | Logging to file: logs/project_log_22680.log
+2025-09-23 22:25:05 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:25:05 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:25:05 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:25:05 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:25:05 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:25:05 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:25:05 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:25:05 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:25:05 | INFO | Deleted existing live data file.
+2025-09-23 22:25:05 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:25:05 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:25:06 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:25:06 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:25:06 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:25:06 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:25:06 | INFO | {'message': 'A lord to a lord, a man to a man; stuffed with all honourable', 'author': 'borachio', 'timestamp': '2025-09-23 22:25:06', 'category': 'literature', 'sentiment': 0.74, 'keyword_mentioned': 'virtue', 'message_length': 61}
+2025-09-23 22:25:11 | INFO | {'message': 'it is needful that you frame the season for your own harvest.', 'author': 'messenger', 'timestamp': '2025-09-23 22:25:11', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:25:16 | INFO | {'message': 'villain. I am trusted with a muzzle and enfranchised with a clog;', 'author': 'claudio', 'timestamp': '2025-09-23 22:25:16', 'category': 'literature', 'sentiment': 0.44, 'keyword_mentioned': 'other', 'message_length': 65}
+2025-09-23 22:25:21 | INFO | {'message': 'should be worthy, is the opinion that fire cannot melt out of me: I will', 'author': 'don pedro', 'timestamp': '2025-09-23 22:25:21', 'category': 'literature', 'sentiment': 0.56, 'keyword_mentioned': 'other', 'message_length': 72}
+2025-09-23 22:25:26 | INFO | {'message': 'You always end with a jade’s trick: I know you of old.', 'author': 'benedick', 'timestamp': '2025-09-23 22:25:26', 'category': 'literature', 'sentiment': 0.47, 'keyword_mentioned': 'other', 'message_length': 54}
+2025-09-23 22:25:31 | INFO | {'message': 'would bite; if I had my liberty, I would do my liking: in the meantime,', 'author': 'messenger', 'timestamp': '2025-09-23 22:25:31', 'category': 'literature', 'sentiment': 0.86, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:25:36 | INFO | {'message': 'acknowledge it this night in a dance; and if he found her accordant, he', 'author': 'claudio', 'timestamp': '2025-09-23 22:25:36', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:25:41 | INFO | {'message': 'Yea, and a case to put it into. But speak you this with a sad', 'author': 'beatrice', 'timestamp': '2025-09-23 22:25:41', 'category': 'literature', 'sentiment': 0.18, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:25:46 | INFO | {'message': 'be meet with you, I doubt it not.', 'author': 'don john', 'timestamp': '2025-09-23 22:25:46', 'category': 'literature', 'sentiment': 0.32, 'keyword_mentioned': 'other', 'message_length': 33}
+2025-09-23 22:25:51 | INFO | {'message': 'O! he is returned, and as pleasant as ever he was.', 'author': 'leonato', 'timestamp': '2025-09-23 22:25:51', 'category': 'literature', 'sentiment': 0.78, 'keyword_mentioned': 'other', 'message_length': 50}
+2025-09-23 22:25:56 | INFO | {'message': 'No, not till a hot January.', 'author': 'leonato', 'timestamp': '2025-09-23 22:25:56', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 27}
+2025-09-23 22:26:01 | INFO | {'message': 'detain us longer: I dare swear he is no hypocrite, but prays from his', 'author': 'don john', 'timestamp': '2025-09-23 22:26:01', 'category': 'literature', 'sentiment': 0.56, 'keyword_mentioned': 'other', 'message_length': 69}
+2025-09-23 22:26:06 | INFO | {'message': 'Then after to her father will I break;', 'author': 'messenger', 'timestamp': '2025-09-23 22:26:06', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 38}
+2025-09-23 22:26:11 | INFO | {'message': 'I came yonder from a great supper: the Prince your brother is', 'author': 'beatrice', 'timestamp': '2025-09-23 22:26:11', 'category': 'literature', 'sentiment': 0.81, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:26:16 | INFO | {'message': 'let me be that I am, and seek not to alter me.', 'author': 'benedick', 'timestamp': '2025-09-23 22:26:16', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 46}
+2025-09-23 22:26:21 | INFO | {'message': 'Do, good friend.', 'author': 'leonato', 'timestamp': '2025-09-23 22:26:21', 'category': 'literature', 'sentiment': 0.86, 'keyword_mentioned': 'other', 'message_length': 16}
+2025-09-23 22:26:26 | INFO | {'message': 'My love is thine to teach: teach it but how,', 'author': 'don pedro', 'timestamp': '2025-09-23 22:26:26', 'category': 'literature', 'sentiment': 0.69, 'keyword_mentioned': 'affection', 'message_length': 44}
+2025-09-23 22:26:31 | INFO | {'message': 'There is no measure in the occasion that breeds; therefore the', 'author': 'benedick', 'timestamp': '2025-09-23 22:26:31', 'category': 'literature', 'sentiment': 0.35, 'keyword_mentioned': 'other', 'message_length': 62}
+2025-09-23 22:26:36 | INFO | {'message': 'Do, good friend.', 'author': 'benedick', 'timestamp': '2025-09-23 22:26:36', 'category': 'literature', 'sentiment': 0.86, 'keyword_mentioned': 'other', 'message_length': 16}
+2025-09-23 22:26:41 | INFO | {'message': 'pound ere he be cured.', 'author': 'don john', 'timestamp': '2025-09-23 22:26:41', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 22}
+2025-09-23 22:26:46 | INFO | {'message': 'pound ere he be cured.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:26:46', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 22}
+2025-09-23 22:26:51 | INFO | {'message': 'He is very near by this: he was not three leagues off when I left him.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:26:51', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 70}
+2025-09-23 22:26:56 | INFO | {'message': 'continuer. But keep your way, i’ God’s name; I have done.', 'author': 'claudio', 'timestamp': '2025-09-23 22:26:56', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 57}
+2025-09-23 22:27:01 | INFO | {'message': 'The savage bull may; but if ever the sensible Benedick bear it,', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:01', 'category': 'literature', 'sentiment': 0.38, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:27:06 | INFO | {'message': 'discovered to Claudio that he loved my niece your daughter and meant to', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:06', 'category': 'literature', 'sentiment': 0.8, 'keyword_mentioned': 'affection', 'message_length': 71}
+2025-09-23 22:27:11 | INFO | {'message': 'No; and he were, I would burn my study. But I pray you, who is', 'author': 'beatrice', 'timestamp': '2025-09-23 22:27:11', 'category': 'literature', 'sentiment': 0.72, 'keyword_mentioned': 'other', 'message_length': 62}
+2025-09-23 22:27:16 | INFO | {'message': 'praise, too brown for a fair praise, and too little for a great praise;', 'author': 'beatrice', 'timestamp': '2025-09-23 22:27:16', 'category': 'literature', 'sentiment': 0.98, 'keyword_mentioned': 'other', 'message_length': 71}
+2025-09-23 22:27:21 | INFO | {'message': 'I wonder that thou (being as thou say’st thou art, born', 'author': 'don pedro', 'timestamp': '2025-09-23 22:27:21', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 55}
+2025-09-23 22:27:26 | INFO | {'message': 'Please it your Grace lead on?', 'author': 'beatrice', 'timestamp': '2025-09-23 22:27:26', 'category': 'literature', 'sentiment': 0.81, 'keyword_mentioned': 'virtue', 'message_length': 29}
+2025-09-23 22:27:31 | INFO | {'message': 'and tell him I will not fail him at supper; for indeed he hath made', 'author': 'benedick', 'timestamp': '2025-09-23 22:27:31', 'category': 'literature', 'sentiment': 0.72, 'keyword_mentioned': 'other', 'message_length': 67}
+2025-09-23 22:27:36 | INFO | {'message': 'Yea, and a case to put it into. But speak you this with a sad', 'author': 'antonio', 'timestamp': '2025-09-23 22:27:36', 'category': 'literature', 'sentiment': 0.18, 'keyword_mentioned': 'other', 'message_length': 61}
+2025-09-23 22:27:41 | INFO | {'message': 'Then after to her father will I break;', 'author': 'antonio', 'timestamp': '2025-09-23 22:27:41', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 38}
+2025-09-23 22:27:46 | INFO | {'message': 'God keep your Ladyship still in that mind; so some gentleman or', 'author': 'claudio', 'timestamp': '2025-09-23 22:27:46', 'category': 'literature', 'sentiment': 0.64, 'keyword_mentioned': 'other', 'message_length': 63}
+2025-09-23 22:27:51 | INFO | {'message': 'How sweetly you do minister to love,', 'author': 'don john', 'timestamp': '2025-09-23 22:27:51', 'category': 'literature', 'sentiment': 0.9, 'keyword_mentioned': 'affection', 'message_length': 36}
+2025-09-23 22:27:56 | INFO | {'message': 'Signior Benedick, no; for then were you a child.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:27:56', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 48}
+2025-09-23 22:28:01 | INFO | {'message': 'I shall see thee, ere I die, look pale with love.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:28:01', 'category': 'literature', 'sentiment': 0.54, 'keyword_mentioned': 'affection', 'message_length': 49}
+2025-09-23 22:28:06 | INFO | {'message': 'die in it at the stake.', 'author': 'leonato', 'timestamp': '2025-09-23 22:28:06', 'category': 'literature', 'sentiment': 0.2, 'keyword_mentioned': 'other', 'message_length': 23}
+2025-09-23 22:28:11 | INFO | {'message': 'discovered to Claudio that he loved my niece your daughter and meant to', 'author': 'benedick', 'timestamp': '2025-09-23 22:28:11', 'category': 'literature', 'sentiment': 0.8, 'keyword_mentioned': 'affection', 'message_length': 71}
+2025-09-23 22:28:16 | INFO | {'message': 'ladies, only you excepted; and I would I could find in my heart that I had', 'author': 'claudio', 'timestamp': '2025-09-23 22:28:16', 'category': 'literature', 'sentiment': 0.82, 'keyword_mentioned': 'other', 'message_length': 74}
+2025-09-23 22:28:21 | INFO | {'message': 'A very forward March-chick! How came you to this?', 'author': 'don pedro', 'timestamp': '2025-09-23 22:28:21', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 49}
+2025-09-23 22:28:26 | INFO | {'message': 'If thou dost love fair Hero, cherish it,', 'author': 'don pedro', 'timestamp': '2025-09-23 22:28:26', 'category': 'literature', 'sentiment': 0.96, 'keyword_mentioned': 'affection', 'message_length': 40}
+2025-09-23 22:28:31 | INFO | {'message': 'she were unhandsome, and being no other but as she is, I do not like her.', 'author': 'benedick', 'timestamp': '2025-09-23 22:28:31', 'category': 'literature', 'sentiment': 0.25, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:28:36 | INFO | {'message': 'only this commendation I can afford her, that were she other than she is,', 'author': 'benedick', 'timestamp': '2025-09-23 22:28:36', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'other', 'message_length': 73}
+2025-09-23 22:28:40 | WARNING | Producer interrupted by user.
+2025-09-23 22:28:40 | INFO | Producer shutting down.

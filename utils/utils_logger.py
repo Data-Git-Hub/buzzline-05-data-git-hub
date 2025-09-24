@@ -16,6 +16,7 @@ Features:
 #####################################
 
 # Imports from Python Standard Library
+import os
 import pathlib
 import getpass
 import sys
@@ -25,22 +26,8 @@ from typing import Mapping, Any
 from loguru import logger
 
 #####################################
-# Default Configurations
+# Helper: sanitize + format
 #####################################
-
-# Get this file name without the extension
-CURRENT_SCRIPT = pathlib.Path(__file__).stem
-
-# Set directory where logs will be stored
-LOG_FOLDER: pathlib.Path = pathlib.Path("logs")
-
-# Set the name of the log file
-LOG_FILE: pathlib.Path = LOG_FOLDER.joinpath("project_log.log")
-
-#####################################
-# Helper Functions
-#####################################
-
 
 def sanitize_message(record: Mapping[str, Any]) -> str:
     """Remove personal/identifying information from log messages and escape braces."""
@@ -67,14 +54,12 @@ def sanitize_message(record: Mapping[str, Any]) -> str:
     except Exception:
         pass
 
-    # Replace Windows backslashes with forward slashes for consistency
+    # Normalize slashes
     message = message.replace("\\", "/")
 
-    # IMPORTANT: Escape braces so Loguru's string formatter won't treat them as fields
-    # This preserves your original "{time} | {level} | {message}" format safely.
+    # Escape braces so Loguru won't treat them as fields
     message = message.replace("{", "{{").replace("}", "}}")
 
-    # Return the sanitized message without modifying the record
     return message
 
 
@@ -86,34 +71,55 @@ def format_sanitized(record: Mapping[str, Any]) -> str:
     return f"{time_str} | {level_name} | {message}\n"
 
 
-try:
-    LOG_FOLDER.mkdir(exist_ok=True)
-    print(f"Log folder ready at: {LOG_FOLDER}")
-except Exception as e:
-    print(f"Error creating log folder: {e}")
+#####################################
+# Logging setup (per-PID files; no rotation)
+#####################################
+
+LOG_FOLDER: pathlib.Path = pathlib.Path("logs")
+LOG_FOLDER.mkdir(exist_ok=True)
+
+# One log file per process to avoid Windows rename collisions
+PID = os.getpid()
+LOG_FILE: pathlib.Path = LOG_FOLDER / f"project_log_{PID}.log"
 
 try:
     logger.remove()
+
+    # File sink: no rotation/retention to avoid Windows rename contention
     logger.add(
         LOG_FILE,
         level="INFO",
-        rotation="50 kB",  # Small files
-        retention=1,  # Keep last rotated file
-        compression=None,  # No compression needed
-        enqueue=True,  # safer across threads/processes
+        enqueue=True,          # multiprocess-safe queue
         format=format_sanitized,
+        # rotation=None,       # default None
+        # retention=None,      # default None
     )
+
+    # Console sink (stderr). If you want fewer logs on screen,
+    # comment this out in either the producer or consumer.
     logger.add(
         sys.stderr,
         level="INFO",
         enqueue=True,
         format=format_sanitized,
     )
+
     logger.info(f"Logging to file: {LOG_FILE}")
     logger.info("Log sanitization enabled, personal info removed")
-except Exception as e:
-    logger.error(f"Error configuring logger to write to file: {e}")
 
+except Exception as e:
+    # Fallback: ensure we still log to stderr if file sink fails
+    try:
+        logger.remove()
+        logger.add(sys.stderr, level="INFO", enqueue=True, format=format_sanitized)
+        logger.error(f"Error configuring file logger, using stderr only: {e}")
+    except Exception:
+        pass
+
+
+#####################################
+# Convenience helpers (unchanged)
+#####################################
 
 def get_log_file_path() -> pathlib.Path:
     """Return the path to the log file."""
@@ -133,24 +139,15 @@ def log_example() -> None:
 
 
 #####################################
-# Main Function for Testing
+# Main for quick manual test (optional)
 #####################################
-
 
 def main() -> None:
-    """Main function to execute logger setup and demonstrate its usage."""
-    logger.info(f"STARTING {CURRENT_SCRIPT}.py")
-
-    # Call the example logging function
+    logger.info("STARTING utils_logger.py")
     log_example()
-
     logger.info(f"View the log output at {LOG_FILE}")
-    logger.info(f"EXITING {CURRENT_SCRIPT}.py.")
+    logger.info("EXITING utils_logger.py")
 
-
-#####################################
-# Conditional Execution
-#####################################
 
 if __name__ == "__main__":
     main()

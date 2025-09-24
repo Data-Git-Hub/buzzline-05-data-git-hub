@@ -1,0 +1,57 @@
+2025-09-23 22:44:38 | INFO | Logging to file: logs/project_log_38424.log
+2025-09-23 22:44:38 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 22:44:38 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 22:44:38 | INFO | Use Ctrl+C to stop.
+2025-09-23 22:44:38 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 22:44:38 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 22:44:38 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 22:44:38 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 22:44:38 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 22:44:38 | INFO | [producer_much_ado] Using reference JSON: PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 22:44:38 | INFO | Deleted existing live data file.
+2025-09-23 22:44:38 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:44:38 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 22:44:38 | INFO | Kafka broker address: localhost:9092
+2025-09-23 22:44:38 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 22:44:38 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 22:44:39 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 22:44:39 | INFO | {'message': 'Benedick, my dear friend Leonato hath invited you all. I tell him we shall', 'author': 'don pedro', 'timestamp': '2025-09-23 22:44:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 74}
+2025-09-23 22:44:44 | INFO | {'message': 'skirmish of wit between them.', 'author': 'benedick', 'timestamp': '2025-09-23 22:44:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 29}
+2025-09-23 22:44:49 | INFO | {'message': 'flight; and my uncle’s fool, reading the challenge, subscribed for', 'author': 'benedick', 'timestamp': '2025-09-23 22:44:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 66}
+2025-09-23 22:44:54 | INFO | {'message': 'subdued. Would the cook were of my mind! Shall we go to prove what’s', 'author': 'benedick', 'timestamp': '2025-09-23 22:44:54', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 22:44:59 | INFO | {'message': 'professed tyrant to their sex?', 'author': 'benedick', 'timestamp': '2025-09-23 22:44:59', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 30}
+2025-09-23 22:45:04 | INFO | {'message': 'I would have salv’d it with a longer treatise.', 'author': 'leonato', 'timestamp': '2025-09-23 22:45:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 46}
+2025-09-23 22:45:09 | INFO | {'message': 'God keep your Ladyship still in that mind; so some gentleman or', 'author': 'benedick', 'timestamp': '2025-09-23 22:45:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 63}
+2025-09-23 22:45:14 | INFO | {'message': 'I looked upon her with a soldier’s eye,', 'author': 'benedick', 'timestamp': '2025-09-23 22:45:14', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 39}
+2025-09-23 22:45:19 | INFO | {'message': 'I will assume thy part in some disguise,', 'author': 'claudio', 'timestamp': '2025-09-23 22:45:19', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 40}
+2025-09-23 22:45:24 | INFO | {'message': 'me behind the arras, and there heard it agreed upon that the Prince should', 'author': 'benedick', 'timestamp': '2025-09-23 22:45:24', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 74}
+2025-09-23 22:45:29 | INFO | {'message': 'I have already delivered him letters, and there appears much', 'author': 'messenger', 'timestamp': '2025-09-23 22:45:29', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 60}
+2025-09-23 22:45:34 | INFO | {'message': 'may see Benedick the married man.’', 'author': 'leonato', 'timestamp': '2025-09-23 22:45:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 34}
+2025-09-23 22:45:39 | INFO | {'message': 'And the conclusion is, she shall be thine.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:45:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 42}
+2025-09-23 22:45:44 | INFO | {'message': 'it.', 'author': 'leonato', 'timestamp': '2025-09-23 22:45:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 3}
+2025-09-23 22:45:49 | INFO | {'message': 'In practice let us put it presently.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:45:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 36}
+2025-09-23 22:45:54 | INFO | {'message': 'If thou dost love fair Hero, cherish it,', 'author': 'claudio', 'timestamp': '2025-09-23 22:45:54', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 40}
+2025-09-23 22:45:59 | INFO | {'message': 'smile at no man’s jests; eat when I have stomach, and wait for no', 'author': 'antonio', 'timestamp': '2025-09-23 22:45:59', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 65}
+2025-09-23 22:46:04 | INFO | {'message': 'With anger, with sickness, or with hunger, my lord; not with', 'author': 'leonato', 'timestamp': '2025-09-23 22:46:04', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 60}
+2025-09-23 22:46:09 | INFO | {'message': 'detain us longer: I dare swear he is no hypocrite, but prays from his', 'author': 'messenger', 'timestamp': '2025-09-23 22:46:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 69}
+2025-09-23 22:46:14 | INFO | {'message': 'humour for that. I had rather hear my dog bark at a crow than a man swear', 'author': 'benedick', 'timestamp': '2025-09-23 22:46:14', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 22:46:19 | INFO | {'message': 'short his answer is: with Hero, Leonato’s short daughter.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:46:19', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 57}
+2025-09-23 22:46:24 | INFO | {'message': 'being a man. Truly the lady fathers herself. Be happy, lady, for you are', 'author': 'leonato', 'timestamp': '2025-09-23 22:46:24', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 72}
+2025-09-23 22:46:29 | INFO | {'message': 'he is in love. With who? now that is your Grace’s part. Mark how', 'author': 'beatrice', 'timestamp': '2025-09-23 22:46:29', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 64}
+2025-09-23 22:46:34 | INFO | {'message': 'die in it at the stake.', 'author': 'conrade', 'timestamp': '2025-09-23 22:46:34', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 23}
+2025-09-23 22:46:39 | INFO | {'message': 'And I will fit thee with the remedy.', 'author': 'beatrice', 'timestamp': '2025-09-23 22:46:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 36}
+2025-09-23 22:46:44 | INFO | {'message': 'A kind overflow of kindness. There are no faces truer than those', 'author': 'messenger', 'timestamp': '2025-09-23 22:46:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 64}
+2025-09-23 22:46:49 | INFO | {'message': 'killed and eaten in these wars? But how many hath he killed? for, indeed,', 'author': 'leonato', 'timestamp': '2025-09-23 22:46:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 22:46:54 | INFO | {'message': 'weeping!', 'author': 'benedick', 'timestamp': '2025-09-23 22:46:54', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 8}
+2025-09-23 22:46:59 | INFO | {'message': 'And a good soldier too, lady.', 'author': 'benedick', 'timestamp': '2025-09-23 22:46:59', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 29}
+2025-09-23 22:47:04 | INFO | {'message': 'be vilely painted, and in such great letters as they write, ‘Here is', 'author': 'beatrice', 'timestamp': '2025-09-23 22:47:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 22:47:09 | INFO | {'message': 'your daughter.', 'author': 'messenger', 'timestamp': '2025-09-23 22:47:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 14}
+2025-09-23 22:47:14 | INFO | {'message': 'it.', 'author': 'messenger', 'timestamp': '2025-09-23 22:47:14', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 3}
+2025-09-23 22:47:19 | INFO | {'message': 'killed and eaten in these wars? But how many hath he killed? for, indeed,', 'author': 'conrade', 'timestamp': '2025-09-23 22:47:19', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 22:47:24 | INFO | {'message': 'would bite; if I had my liberty, I would do my liking: in the meantime,', 'author': 'leonato', 'timestamp': '2025-09-23 22:47:24', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 22:47:29 | INFO | {'message': 'Balthasar and Others.', 'author': 'messenger', 'timestamp': '2025-09-23 22:47:29', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 21}
+2025-09-23 22:47:34 | INFO | {'message': 'And the conclusion is, she shall be thine.', 'author': 'don pedro', 'timestamp': '2025-09-23 22:47:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 42}
+2025-09-23 22:47:39 | INFO | {'message': 'subdued. Would the cook were of my mind! Shall we go to prove what’s', 'author': 'beatrice', 'timestamp': '2025-09-23 22:47:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 22:47:44 | INFO | {'message': 'man’s leisure; sleep when I am drowsy, and tend on no man’s', 'author': 'claudio', 'timestamp': '2025-09-23 22:47:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 59}
+2025-09-23 22:47:46 | WARNING | Producer interrupted by user.
+2025-09-23 22:47:46 | INFO | Producer shutting down.
