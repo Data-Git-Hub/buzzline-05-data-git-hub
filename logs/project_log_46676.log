@@ -1,0 +1,36 @@
+2025-09-23 23:31:38 | INFO | Logging to file: logs/project_log_46676.log
+2025-09-23 23:31:38 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 23:31:38 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 23:31:38 | INFO | Use Ctrl+C to stop.
+2025-09-23 23:31:38 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 23:31:38 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 23:31:38 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 23:31:38 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 23:31:38 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 23:31:38 | INFO | [producer_much_ado] Using reference JSON: PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 23:31:38 | INFO | Deleted existing live data file.
+2025-09-23 23:31:38 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:31:38 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 23:31:38 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:31:39 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 23:31:39 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 23:31:39 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 23:31:39 | INFO | {'message': 'she were unhandsome, and being no other but as she is, I do not like her.', 'author': 'don john', 'timestamp': '2025-09-23 23:31:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 23:31:44 | INFO | {'message': 'I thank you: I am not of many words, but I thank you.', 'author': 'beatrice', 'timestamp': '2025-09-23 23:31:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 53}
+2025-09-23 23:31:49 | INFO | {'message': 'Let me bid you welcome, my lord: being reconciled to', 'author': 'don pedro', 'timestamp': '2025-09-23 23:31:49', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 52}
+2025-09-23 23:31:54 | INFO | {'message': 'with drinking, pick out mine eyes with a ballad-maker’s pen and hang', 'author': 'don pedro', 'timestamp': '2025-09-23 23:31:54', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 23:31:59 | INFO | {'message': 'than you must expect of me to tell you how.', 'author': 'benedick', 'timestamp': '2025-09-23 23:31:59', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 43}
+2025-09-23 23:32:04 | INFO | {'message': 'If my passion change not shortly, God forbid it should be otherwise.', 'author': 'don john', 'timestamp': '2025-09-23 23:32:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 23:32:09 | INFO | {'message': 'no intent to turn husband, have you?', 'author': 'messenger', 'timestamp': '2025-09-23 23:32:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 36}
+2025-09-23 23:32:14 | INFO | {'message': 'and he hath ta’en you newly into his grace; where it is impossible', 'author': 'don pedro', 'timestamp': '2025-09-23 23:32:14', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 66}
+2025-09-23 23:32:19 | INFO | {'message': 'other shall scape a predestinate scratched face.', 'author': 'don john', 'timestamp': '2025-09-23 23:32:19', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 48}
+2025-09-23 23:32:24 | INFO | {'message': 'I likewise give her most humble thanks; but that I will have a recheat', 'author': 'beatrice', 'timestamp': '2025-09-23 23:32:24', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 70}
+2025-09-23 23:32:29 | INFO | {'message': 'news that you yet dreamt not of.', 'author': 'don pedro', 'timestamp': '2025-09-23 23:32:29', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 32}
+2025-09-23 23:32:34 | INFO | {'message': 'Will it serve for any model to build mischief on? What is he for', 'author': 'benedick', 'timestamp': '2025-09-23 23:32:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 64}
+2025-09-23 23:32:39 | INFO | {'message': 'not a hard heart; for, truly, I love none.', 'author': 'beatrice', 'timestamp': '2025-09-23 23:32:39', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 42}
+2025-09-23 23:32:44 | INFO | {'message': 'of threescore again? Go to, i’ faith; and thou wilt needs thrust thy', 'author': 'messenger', 'timestamp': '2025-09-23 23:32:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 23:32:49 | INFO | {'message': 'Why, i’ faith, methinks she’s too low for a high', 'author': 'messenger', 'timestamp': '2025-09-23 23:32:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 48}
+2025-09-23 23:32:54 | INFO | {'message': 'acknowledge it this night in a dance; and if he found her accordant, he', 'author': 'beatrice', 'timestamp': '2025-09-23 23:32:54', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 23:32:59 | INFO | {'message': 'Like the old tale, my lord: ‘it is not so, nor', 'author': 'hero', 'timestamp': '2025-09-23 23:32:59', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 46}
+2025-09-23 23:33:00 | WARNING | Producer interrupted by user.
+2025-09-23 23:33:00 | INFO | Producer shutting down.

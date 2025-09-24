@@ -3,6 +3,7 @@
 Custom consumer (Kafka) that:
 - Validates (author, message) pairs against a reference corpus (Much Ado).
 - Flags messages that contain configured "flag words" from files/flag_words.txt.
+- Checks authors against files/bad_authors.txt and tracks counts in SQLite.
 - Writes one processed row per message to SQLite (author_validation table).
 - Emits "alerts" to console and to SQLite (alerts table) when policy matches.
 
@@ -68,25 +69,26 @@ ALERT_KEYWORD_MIN: int = _env_int("ALERT_KEYWORD_MIN", 1)
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 REF_FILE_CANDIDATES: List[pathlib.Path] = [
-    # Preferred: repo-relative files folder
     PROJECT_ROOT / "files" / "much_ado_excerpt.json",
-    # Tolerate common typos if user provided them by mistake (kept as fallback)
     PROJECT_ROOT / "files" / "much_ado_except.json",
     PROJECT_ROOT / "files" / "much_ado_execpt.json",
-    # Your absolute path form (if you keep files there)
     pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\much_ado_excerpt.json"),
 ]
 
 FLAG_FILE_CANDIDATES: List[pathlib.Path] = [
     PROJECT_ROOT / "files" / "flag_words.txt",
-    # also accept .json if you ever switch
     PROJECT_ROOT / "files" / "flag_words.json",
     pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\flag_words.txt"),
     pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\flag_words.json"),
 ]
 
+BAD_AUTHORS_FILE_CANDIDATES: List[pathlib.Path] = [
+    PROJECT_ROOT / "files" / "bad_authors.txt",
+    pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\bad_authors.txt"),
+]
+
 # ======================================================================================
-# SQLite schema
+# SQLite schema (+ tiny migration for is_bad_author)
 # ======================================================================================
 
 AUTHOR_VALIDATION_TABLE_SQL = """
@@ -97,7 +99,8 @@ CREATE TABLE IF NOT EXISTS author_validation (
     message TEXT,
     author_message_valid INTEGER,
     keyword_hit_count INTEGER,
-    keywords_hit TEXT
+    keywords_hit TEXT,
+    is_bad_author INTEGER DEFAULT 0
 );
 """
 
@@ -113,15 +116,30 @@ CREATE TABLE IF NOT EXISTS alerts (
 );
 """
 
-# ======================================================================================
-# DB helpers
-# ======================================================================================
+BAD_AUTHOR_STATS_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS bad_author_stats (
+    author TEXT PRIMARY KEY,
+    hit_count INTEGER NOT NULL DEFAULT 0
+);
+"""
+
+def _table_has_column(conn: sqlite3.Connection, table: str, column: str) -> bool:
+    cur = conn.execute(f"PRAGMA table_info({table});")
+    cols = {row[1] for row in cur.fetchall()}
+    return column in cols
+
+def _maybe_add_is_bad_author(conn: sqlite3.Connection) -> None:
+    if not _table_has_column(conn, "author_validation", "is_bad_author"):
+        conn.execute("ALTER TABLE author_validation ADD COLUMN is_bad_author INTEGER DEFAULT 0;")
 
 def init_db(db_path: pathlib.Path) -> None:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     with sqlite3.connect(str(db_path)) as conn:
         conn.execute(AUTHOR_VALIDATION_TABLE_SQL)
         conn.execute(ALERTS_TABLE_SQL)
+        conn.execute(BAD_AUTHOR_STATS_TABLE_SQL)
+        # migration safeguard if table existed from older runs
+        _maybe_add_is_bad_author(conn)
         conn.commit()
     logger.info(f"[consumer_data_git_hub] SQLite ready at {db_path}")
 
@@ -131,8 +149,8 @@ def insert_row(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
             """
             INSERT INTO author_validation (
                 src_timestamp, author, message, author_message_valid,
-                keyword_hit_count, keywords_hit
-            ) VALUES (?, ?, ?, ?, ?, ?);
+                keyword_hit_count, keywords_hit, is_bad_author
+            ) VALUES (?, ?, ?, ?, ?, ?, ?);
             """,
             (
                 row.get("src_timestamp"),
@@ -141,6 +159,7 @@ def insert_row(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
                 int(row.get("author_message_valid", 0)),
                 int(row.get("keyword_hit_count", 0)),
                 row.get("keywords_hit", "") or "",
+                int(row.get("is_bad_author", 0)),
             ),
         )
         conn.commit()
@@ -164,8 +183,21 @@ def insert_alert(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
         )
         conn.commit()
 
+def increment_bad_author(db_path: pathlib.Path, author: str) -> None:
+    if not author:
+        return
+    with sqlite3.connect(str(db_path)) as conn:
+        conn.execute(
+            """
+            INSERT INTO bad_author_stats(author, hit_count) VALUES(?, 1)
+            ON CONFLICT(author) DO UPDATE SET hit_count = hit_count + 1;
+            """,
+            (author.strip().lower(),),
+        )
+        conn.commit()
+
 # ======================================================================================
-# Reference loader & tokenization & flag words
+# Reference loader, tokens, flag words, bad authors
 # ======================================================================================
 
 _TOKEN_RE = re.compile(r"[A-Za-z']+")
@@ -180,11 +212,6 @@ def _first_existing(candidates: Sequence[pathlib.Path]) -> Optional[pathlib.Path
     return None
 
 def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
-    """
-    Load Much Ado reference JSON. Returns:
-      - a set of (author_lower, message_stripped_lower)
-      - a flat list of tokens from all messages (lowercased)
-    """
     ref_path = _first_existing(REF_FILE_CANDIDATES)
     if not ref_path:
         logger.warning("[consumer_data_git_hub] No reference file found; author validation will be 0.")
@@ -208,15 +235,10 @@ def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
         return set(), []
 
 def load_flag_words() -> Set[str]:
-    """
-    Load flag words. We expect files/flag_words.txt (one word per line).
-    Also supports a JSON list if you prefer (flag_words.json).
-    """
     p = _first_existing(FLAG_FILE_CANDIDATES)
     if not p:
         logger.warning("[consumer_data_git_hub] No flag words file found; keyword alerts will never trigger.")
         return set()
-
     try:
         if p.suffix.lower() == ".json":
             words = set(json.loads(p.read_text(encoding="utf-8")))
@@ -230,6 +252,23 @@ def load_flag_words() -> Set[str]:
         return words
     except Exception as e:
         logger.error(f"[consumer_data_git_hub] Failed to load flag words from {p}: {e}")
+        return set()
+
+def load_bad_authors() -> Set[str]:
+    p = _first_existing(BAD_AUTHORS_FILE_CANDIDATES)
+    if not p:
+        logger.warning("[consumer_data_git_hub] No bad_authors.txt found; bad author tracking disabled.")
+        return set()
+    try:
+        authors = {
+            a.strip().lower()
+            for a in p.read_text(encoding="utf-8").splitlines()
+            if a.strip() and not a.strip().startswith("#")
+        }
+        logger.info(f"[consumer_data_git_hub] Loaded {len(authors)} bad authors from {p}")
+        return authors
+    except Exception as e:
+        logger.error(f"[consumer_data_git_hub] Failed to load bad authors from {p}: {e}")
         return set()
 
 # ======================================================================================
@@ -280,6 +319,7 @@ def process_message(
     payload: Mapping[str, Any],
     ref_pairs: Set[Tuple[str, str]],
     flag_words: Set[str],
+    bad_authors: Set[str],
 ) -> Dict[str, Any]:
     author = str(payload.get("author", "")).strip()
     message = str(payload.get("message", "")).strip()
@@ -287,6 +327,7 @@ def process_message(
 
     valid = validate_author_message(author, message, ref_pairs)
     kw_count, kw_list = count_keyword_hits(message, flag_words)
+    is_bad_author = int(author.lower() in bad_authors) if author else 0
 
     row = {
         "src_timestamp": ts,
@@ -295,6 +336,7 @@ def process_message(
         "author_message_valid": int(valid),
         "keyword_hit_count": int(kw_count),
         "keywords_hit": kw_list,
+        "is_bad_author": is_bad_author,
     }
     logger.info(f"[consumer_data_git_hub] Processed row: {row}")
     return row
@@ -311,12 +353,13 @@ def main() -> None:
     group_id = config.get_kafka_consumer_group_id()
     sqlite_path = config.get_sqlite_path()
 
-    # Prepare DB
+    # Prepare DB (incl. migration)
     init_db(sqlite_path)
 
-    # Load reference and flag words
+    # Load reference, flags, bad authors
     ref_pairs, _ = load_reference_pairs_and_tokens()
     flag_words = load_flag_words()
+    bad_authors = load_bad_authors()
 
     # Log active alert policy
     logger.info(
@@ -341,10 +384,14 @@ def main() -> None:
     try:
         for msg in consumer:
             payload = msg.value  # already deserialized dict
-            row = process_message(payload, ref_pairs, flag_words)
+            row = process_message(payload, ref_pairs, flag_words, bad_authors)
 
             # Store every processed message
             insert_row(sqlite_path, row)
+
+            # Track bad author counts
+            if row.get("is_bad_author"):
+                increment_bad_author(sqlite_path, row.get("author", ""))
 
             # Alert decision & record
             decision = should_alert(row)
@@ -353,7 +400,6 @@ def main() -> None:
                 decision,
                 explain_alert_decision(row),
             )
-
             if decision:
                 insert_alert(sqlite_path, row)
                 logger.warning(

@@ -1,0 +1,65 @@
+2025-09-23 23:31:43 | INFO | Logging to file: logs/project_log_19972.log
+2025-09-23 23:31:43 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-23 23:31:43 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 23:31:43 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-23 23:31:43 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 23:31:43 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] Loaded reference pairs: 321 from PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] Loaded 42 flag words from PROJECT_ROOT/files/flag_words.txt
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] Loaded 1 bad authors from PROJECT_ROOT/files/bad_authors.txt
+2025-09-23 23:31:43 | INFO | [consumer_data_git_hub] ALERT_ON_VALID_AUTHOR_ONLY=False ALERT_KEYWORD_MIN=1
+2025-09-23 23:31:43 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:31:44 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 23:31:44 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:31:44 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-23 23:31:44 | INFO | Kafka consumer created successfully.
+2025-09-23 23:31:44 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:31:44', 'author': 'beatrice', 'message': 'I thank you: I am not of many words, but I thank you.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:31:49', 'author': 'don pedro', 'message': 'Let me bid you welcome, my lord: being reconciled to', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:31:50 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:31:54 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:31:54', 'author': 'don pedro', 'message': 'with drinking, pick out mine eyes with a ballad-maker’s pen and hang', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:31:54 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:31:54 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:31:59 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:31:59', 'author': 'benedick', 'message': 'than you must expect of me to tell you how.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:31:59 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:31:59 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:04 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:04', 'author': 'don john', 'message': 'If my passion change not shortly, God forbid it should be otherwise.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:04 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:04 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:09 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:09', 'author': 'messenger', 'message': 'no intent to turn husband, have you?', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 1}
+2025-09-23 23:32:09 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:09 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:14 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:14', 'author': 'don pedro', 'message': 'and he hath ta’en you newly into his grace; where it is impossible', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:14 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:14 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:19 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:19', 'author': 'don john', 'message': 'other shall scape a predestinate scratched face.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:19 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:19 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:24 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:24', 'author': 'beatrice', 'message': 'I likewise give her most humble thanks; but that I will have a recheat', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:24 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:24 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:29 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:29', 'author': 'don pedro', 'message': 'news that you yet dreamt not of.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:29 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:29 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:34 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:34', 'author': 'benedick', 'message': 'Will it serve for any model to build mischief on? What is he for', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:34 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:34 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:39 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:39', 'author': 'beatrice', 'message': 'not a hard heart; for, truly, I love none.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:39 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:39 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:44 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:44', 'author': 'messenger', 'message': 'of threescore again? Go to, i’ faith; and thou wilt needs thrust thy', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 1}
+2025-09-23 23:32:44 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:44 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:49 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:49', 'author': 'messenger', 'message': 'Why, i’ faith, methinks she’s too low for a high', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 1}
+2025-09-23 23:32:49 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:49 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:54 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-23 23:32:54', 'author': 'beatrice', 'message': 'acknowledge it this night in a dance; and if he found her accordant, he', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': '', 'is_bad_author': 0}
+2025-09-23 23:32:54 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-23 23:32:54 | INFO | [consumer_data_git_hub] Alert decision=%s :: %s
+2025-09-23 23:32:55 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-23 23:32:55 | INFO | [consumer_data_git_hub] Shutdown complete.
