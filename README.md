@@ -405,6 +405,7 @@ Contributors names and contact info <br>
 ---
 
 ## Version History
+- P5 Main 1.7 | Modify much_ado_excerpt.json, producer_much_ado.py, README.md
 - P5 Main 1.6 | Modify consumer_data_git_hub.py, README.md
 - P5 Main 1.5 | Modify consumer_data_git_hub.py, flag_words.txt, README.md
 - P5 Main 1.4 | Delete stopwords.txt; Modify flag_words.txt, README.md
