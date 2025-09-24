@@ -72,3 +72,5 @@
 {"message": "I just saw recipe! It was boring.", "author": "Eve", "timestamp": "2025-09-23 20:26:30", "category": "food", "sentiment": 0.0, "keyword_mentioned": "recipe", "message_length": 33}
 {"message": "I just found an app! It was amazing.", "author": "Charlie", "timestamp": "2025-09-23 20:26:35", "category": "other", "sentiment": 0.17, "keyword_mentioned": "other", "message_length": 36}
 {"message": "I just tried a story! It was amazing.", "author": "Eve", "timestamp": "2025-09-23 20:26:40", "category": "other", "sentiment": 0.71, "keyword_mentioned": "other", "message_length": 37}
+{"message": "I just loved JavaScript! It was weird.", "author": "Charlie", "timestamp": "2025-09-23 20:26:45", "category": "tech", "sentiment": 0.34, "keyword_mentioned": "JavaScript", "message_length": 38}
+{"message": "I just saw a story! It was funny.", "author": "Charlie", "timestamp": "2025-09-23 20:26:50", "category": "other", "sentiment": 0.89, "keyword_mentioned": "other", "message_length": 33}

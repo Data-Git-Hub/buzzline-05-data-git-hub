@@ -222,3 +222,17 @@
 2025-09-23 20:26:40 | INFO | message={'message': 'I just tried a story! It was amazing.', 'author': 'Eve', 'timestamp': '2025-09-23 20:26:40', 'category': 'other', 'sentiment': 0.71, 'keyword_mentioned': 'other', 'message_length': 37}
 2025-09-23 20:26:40 | INFO | db_path=WindowsPath('C:/Projects/buzzline-05-data-git-hub/data/buzz.sqlite')
 2025-09-23 20:26:40 | INFO | Inserted one message into the database.
+2025-09-23 20:26:45 | INFO | {'message': 'I just loved JavaScript! It was weird.', 'author': 'Charlie', 'timestamp': '2025-09-23 20:26:45', 'category': 'tech', 'sentiment': 0.34, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 20:26:45 | INFO | Called process_message() with:
+2025-09-23 20:26:45 | INFO |    message={'message': 'I just loved JavaScript! It was weird.', 'author': 'Charlie', 'timestamp': '2025-09-23 20:26:45', 'category': 'tech', 'sentiment': 0.34, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 20:26:45 | INFO | Processed message: {'message': 'I just loved JavaScript! It was weird.', 'author': 'Charlie', 'timestamp': '2025-09-23 20:26:45', 'category': 'tech', 'sentiment': 0.34, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 20:26:45 | INFO | Calling SQLite insert_message() with:
+2025-09-23 20:26:45 | INFO | message={'message': 'I just loved JavaScript! It was weird.', 'author': 'Charlie', 'timestamp': '2025-09-23 20:26:45', 'category': 'tech', 'sentiment': 0.34, 'keyword_mentioned': 'JavaScript', 'message_length': 38}
+2025-09-23 20:26:45 | INFO | db_path=WindowsPath('C:/Projects/buzzline-05-data-git-hub/data/buzz.sqlite')
+2025-09-23 20:26:45 | INFO | Inserted one message into the database.
+2025-09-23 20:26:47 | WARNING | Consumer interrupted by user.
+2025-09-23 20:26:47 | INFO | Consumer shutting down.
+2025-09-23 20:26:50 | INFO | {'message': 'I just saw a story! It was funny.', 'author': 'Charlie', 'timestamp': '2025-09-23 20:26:50', 'category': 'other', 'sentiment': 0.89, 'keyword_mentioned': 'other', 'message_length': 33}
+2025-09-23 20:26:50 | WARNING | Producer interrupted by user.
+2025-09-23 20:26:50 | INFO | Kafka producer closed.
+2025-09-23 20:26:50 | INFO | Producer shutting down.
