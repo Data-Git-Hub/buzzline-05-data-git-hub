@@ -2,16 +2,20 @@
 """
 Custom consumer (Kafka) that:
 - Validates (author, message) pairs against a reference corpus (Much Ado).
-- Flags messages that contain configured "flag words".
+- Flags messages that contain configured "flag words" from files/flag_words.txt.
 - Writes one processed row per message to SQLite (author_validation table).
 - Emits "alerts" to console and to SQLite (alerts table) when policy matches.
 
 Run:
-  # terminal 1 (producer)
+  # terminal 1 (producer that emits Much Ado lines)
   py -m producers.producer_much_ado
 
   # terminal 2 (this consumer)
   py -m consumers.consumer_data_git_hub
+
+Environment overrides (optional):
+  ALERT_ON_VALID_AUTHOR_ONLY   -> "1"/"true"/"yes" to require valid author-message pair (default: false)
+  ALERT_KEYWORD_MIN            -> integer minimum keyword hits to trigger alert (default: 1)
 """
 
 from __future__ import annotations
@@ -33,10 +37,9 @@ from utils.utils_logger import logger
 from utils.utils_consumer import create_kafka_consumer
 from utils.utils_producer import verify_services
 
-
-# ------------------------------------------------------------------------------------------
-# Environment helpers / Policy
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# Env helpers & Alert policy
+# ======================================================================================
 
 def _env_bool(name: str, default: bool) -> bool:
     v = os.getenv(name)
@@ -50,35 +53,41 @@ def _env_int(name: str, default: int) -> int:
         return default
     try:
         return int(str(v).strip())
-    except Exception:
+    except ValueError:
         return default
 
-# Alert policy:
-# True  = require (author,message) to exist in reference set AND keyword hits >= ALERT_KEYWORD_MIN
-# False = require non-empty author AND keyword hits >= ALERT_KEYWORD_MIN
+# True  = require that (author,message) exists in reference file AND keyword(s) hit
+# False = require non-empty author AND keyword(s) hit
 ALERT_ON_VALID_AUTHOR_ONLY: bool = _env_bool("ALERT_ON_VALID_AUTHOR_ONLY", False)
 ALERT_KEYWORD_MIN: int = _env_int("ALERT_KEYWORD_MIN", 1)
 
-
-# ------------------------------------------------------------------------------------------
-# Paths (use repo root /files)
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# Paths (supports both PROJECT_ROOT relative and your absolute layout)
+# ======================================================================================
 
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
-FILES_DIR = PROJECT_ROOT / "files"
 
 REF_FILE_CANDIDATES: List[pathlib.Path] = [
-    FILES_DIR / "much_ado_excerpt.json",
-    FILES_DIR / "much_ado_except.json",
-    FILES_DIR / "much_ado_execpt.json",
+    # Preferred: repo-relative files folder
+    PROJECT_ROOT / "files" / "much_ado_excerpt.json",
+    # Tolerate common typos if user provided them by mistake (kept as fallback)
+    PROJECT_ROOT / "files" / "much_ado_except.json",
+    PROJECT_ROOT / "files" / "much_ado_execpt.json",
+    # Your absolute path form (if you keep files there)
+    pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\much_ado_excerpt.json"),
 ]
 
-FLAG_WORDS_FILE = FILES_DIR / "flag_words.txt"
+FLAG_FILE_CANDIDATES: List[pathlib.Path] = [
+    PROJECT_ROOT / "files" / "flag_words.txt",
+    # also accept .json if you ever switch
+    PROJECT_ROOT / "files" / "flag_words.json",
+    pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\flag_words.txt"),
+    pathlib.Path(r"C:\Projects\buzzline-05-data-git-hub\files\flag_words.json"),
+]
 
-
-# ------------------------------------------------------------------------------------------
-# SQLite schema / helpers
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# SQLite schema
+# ======================================================================================
 
 AUTHOR_VALIDATION_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS author_validation (
@@ -104,6 +113,10 @@ CREATE TABLE IF NOT EXISTS alerts (
 );
 """
 
+# ======================================================================================
+# DB helpers
+# ======================================================================================
+
 def init_db(db_path: pathlib.Path) -> None:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     with sqlite3.connect(str(db_path)) as conn:
@@ -127,7 +140,7 @@ def insert_row(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
                 row.get("message"),
                 int(row.get("author_message_valid", 0)),
                 int(row.get("keyword_hit_count", 0)),
-                row.get("keywords_hit", ""),
+                row.get("keywords_hit", "") or "",
             ),
         )
         conn.commit()
@@ -146,43 +159,33 @@ def insert_alert(db_path: pathlib.Path, row: Mapping[str, Any]) -> None:
                 row.get("author"),
                 row.get("message"),
                 int(row.get("keyword_hit_count", 0)),
-                row.get("keywords_hit", ""),
+                row.get("keywords_hit", "") or "",
             ),
         )
         conn.commit()
 
-
-def should_alert(row: Mapping[str, Any]) -> bool:
-    """Return True if this row should generate an alert based on policy."""
-    if int(row.get("keyword_hit_count", 0)) < ALERT_KEYWORD_MIN:
-        return False
-    if ALERT_ON_VALID_AUTHOR_ONLY:
-        return bool(row.get("author_message_valid"))
-    else:
-        return bool(str(row.get("author", "")).strip())
-
-
-# ------------------------------------------------------------------------------------------
-# Reference corpus loader (Much Ado)
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# Reference loader & tokenization & flag words
+# ======================================================================================
 
 _TOKEN_RE = re.compile(r"[A-Za-z']+")
 
 def _tokenize_lower(text: str) -> List[str]:
     return [t.lower() for t in _TOKEN_RE.findall(text or "")]
 
+def _first_existing(candidates: Sequence[pathlib.Path]) -> Optional[pathlib.Path]:
+    for p in candidates:
+        if p.exists():
+            return p
+    return None
+
 def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
     """
-    Load the Much Ado reference JSON. Returns:
+    Load Much Ado reference JSON. Returns:
       - a set of (author_lower, message_stripped_lower)
       - a flat list of tokens from all messages (lowercased)
     """
-    ref_path: Optional[pathlib.Path] = None
-    for p in REF_FILE_CANDIDATES:
-        if p.exists():
-            ref_path = p
-            break
-
+    ref_path = _first_existing(REF_FILE_CANDIDATES)
     if not ref_path:
         logger.warning("[consumer_data_git_hub] No reference file found; author validation will be 0.")
         return set(), []
@@ -204,60 +207,80 @@ def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
         logger.error(f"[consumer_data_git_hub] Failed to read reference file: {e}")
         return set(), []
 
-
-# ------------------------------------------------------------------------------------------
-# Flag words loader (file-based only, per your request)
-# ------------------------------------------------------------------------------------------
-
 def load_flag_words() -> Set[str]:
     """
-    Load flag words from files/flag_words.txt (one word per line).
-    If missing, returns empty set and alerts won't fire.
+    Load flag words. We expect files/flag_words.txt (one word per line).
+    Also supports a JSON list if you prefer (flag_words.json).
     """
-    if not FLAG_WORDS_FILE.exists():
+    p = _first_existing(FLAG_FILE_CANDIDATES)
+    if not p:
         logger.warning("[consumer_data_git_hub] No flag words file found; keyword alerts will never trigger.")
         return set()
+
     try:
-        words = {
-            w.strip().lower()
-            for w in FLAG_WORDS_FILE.read_text(encoding="utf-8").splitlines()
-            if w.strip()
-        }
-        logger.info(f"[consumer_data_git_hub] Loaded {len(words)} flag words from {FLAG_WORDS_FILE}")
+        if p.suffix.lower() == ".json":
+            words = set(json.loads(p.read_text(encoding="utf-8")))
+        else:
+            words = {
+                w.strip().lower()
+                for w in p.read_text(encoding="utf-8").splitlines()
+                if w.strip() and not w.strip().startswith("#")
+            }
+        logger.info(f"[consumer_data_git_hub] Loaded {len(words)} flag words from {p}")
         return words
     except Exception as e:
-        logger.error(f"[consumer_data_git_hub] Failed to read flag words file: {e}")
+        logger.error(f"[consumer_data_git_hub] Failed to load flag words from {p}: {e}")
         return set()
 
-
-# ------------------------------------------------------------------------------------------
-# Per-message processing
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# Per-message processing & alert logic
+# ======================================================================================
 
 def validate_author_message(
     author: str,
     message: str,
     ref_pairs: Set[Tuple[str, str]],
 ) -> bool:
-    """Exact match on (author_lower, message_lower) against the reference set."""
     a = (author or "").strip().lower()
     m = (message or "").strip().lower()
     return (a, m) in ref_pairs
 
 def count_keyword_hits(message: str, flag_words: Set[str]) -> Tuple[int, str]:
-    """Count keyword hits; returns (count, comma_separated_keywords_hit)."""
     if not message or not flag_words:
         return 0, ""
     toks = set(_tokenize_lower(message))
     hits = sorted(list(toks.intersection(flag_words)))
     return (len(hits), ", ".join(hits))
 
+def should_alert(row: Mapping[str, Any]) -> bool:
+    kw = int(row.get("keyword_hit_count", 0))
+    if kw < ALERT_KEYWORD_MIN:
+        return False
+
+    if ALERT_ON_VALID_AUTHOR_ONLY:
+        return bool(row.get("author_message_valid"))
+    else:
+        return bool(str(row.get("author", "")).strip())
+
+def explain_alert_decision(row: Mapping[str, Any]) -> str:
+    parts = []
+    kw = int(row.get("keyword_hit_count", 0))
+    parts.append(
+        f"keyword_hit_count({kw}) {'>=' if kw >= ALERT_KEYWORD_MIN else '<'} ALERT_KEYWORD_MIN({ALERT_KEYWORD_MIN})"
+    )
+    if ALERT_ON_VALID_AUTHOR_ONLY:
+        parts.append(f"ALERT_ON_VALID_AUTHOR_ONLY=True; author_message_valid={row.get('author_message_valid')}")
+    else:
+        parts.append(
+            f"ALERT_ON_VALID_AUTHOR_ONLY=False; author_non_empty={bool(str(row.get('author','')).strip())}"
+        )
+    return " | ".join(parts)
+
 def process_message(
     payload: Mapping[str, Any],
     ref_pairs: Set[Tuple[str, str]],
     flag_words: Set[str],
 ) -> Dict[str, Any]:
-    """Transform one incoming JSON message into a stored row structure."""
     author = str(payload.get("author", "")).strip()
     message = str(payload.get("message", "")).strip()
     ts = str(payload.get("timestamp", ""))
@@ -276,30 +299,9 @@ def process_message(
     logger.info(f"[consumer_data_git_hub] Processed row: {row}")
     return row
 
-def explain_alert_decision(row: Mapping[str, Any]) -> str:
-    reasons = []
-    kw = int(row.get("keyword_hit_count", 0))
-    if kw >= ALERT_KEYWORD_MIN:
-        reasons.append(f"keyword_hit_count({kw}) >= ALERT_KEYWORD_MIN({ALERT_KEYWORD_MIN})")
-    else:
-        reasons.append(f"keyword_hit_count({kw}) < ALERT_KEYWORD_MIN({ALERT_KEYWORD_MIN})")
-
-    if ALERT_ON_VALID_AUTHOR_ONLY:
-        if row.get("author_message_valid"):
-            reasons.append("ALERT_ON_VALID_AUTHOR_ONLY=True and author_message_valid=1")
-        else:
-            reasons.append("ALERT_ON_VALID_AUTHOR_ONLY=True but author_message_valid=0")
-    else:
-        if str(row.get("author", "")).strip():
-            reasons.append("ALERT_ON_VALID_AUTHOR_ONLY=False and author is non-empty")
-        else:
-            reasons.append("ALERT_ON_VALID_AUTHOR_ONLY=False but author is empty")
-
-    return " | ".join(reasons)
-
-# ------------------------------------------------------------------------------------------
-# Main (Kafka mode) with resilient poll loop for Windows
-# ------------------------------------------------------------------------------------------
+# ======================================================================================
+# Main
+# ======================================================================================
 
 def main() -> None:
     logger.info("[consumer_data_git_hub] Starting (Kafka mode).")
@@ -307,105 +309,73 @@ def main() -> None:
     # Read config
     topic = config.get_kafka_topic()
     group_id = config.get_kafka_consumer_group_id()
-
-    # Resolve SQLite path: replace literal "PROJECT_ROOT" segment and absolutize
-    raw_sqlite_path = str(config.get_sqlite_path())
-    sqlite_str = raw_sqlite_path.replace("PROJECT_ROOT", str(PROJECT_ROOT))
-    sqlite_path = pathlib.Path(sqlite_str).resolve()
-
-    logger.info(f"[consumer_data_git_hub] Using SQLite at: {sqlite_path}")
+    sqlite_path = config.get_sqlite_path()
 
     # Prepare DB
     init_db(sqlite_path)
 
-    # Load reference & flag words
-    ref_pairs, _ref_tokens = load_reference_pairs_and_tokens()
+    # Load reference and flag words
+    ref_pairs, _ = load_reference_pairs_and_tokens()
     flag_words = load_flag_words()
 
-    # Log policy
+    # Log active alert policy
     logger.info(
-        "[consumer_data_git_hub] ALERT_ON_VALID_AUTHOR_ONLY=%s ALERT_KEYWORD_MIN=%s",
-        ALERT_ON_VALID_AUTHOR_ONLY,
-        ALERT_KEYWORD_MIN,
+        f"[consumer_data_git_hub] ALERT_ON_VALID_AUTHOR_ONLY={ALERT_ON_VALID_AUTHOR_ONLY} "
+        f"ALERT_KEYWORD_MIN={ALERT_KEYWORD_MIN}"
     )
 
-    # Soft-check Kafka
+    # Verify Kafka up (soft)
     try:
         verify_services(strict=False)
     except Exception as e:
         logger.warning(f"[consumer_data_git_hub] Kafka verify warning: {e}")
 
-    def make_consumer() -> KafkaConsumer:
-        return create_kafka_consumer(
-            topic_provided=topic,
-            group_id_provided=group_id,
-            value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
-        )
+    # Create Kafka consumer
+    consumer: KafkaConsumer = create_kafka_consumer(
+        topic_provided=topic,
+        group_id_provided=group_id,
+        value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
+    )
 
-    consumer = make_consumer()
-logger.info("[consumer_data_git_hub] Polling for messages...")
-try:
-    for msg in consumer:
-        payload = msg.value  # already deserialized dict
-        row = process_message(payload, ref_pairs, flag_words)
+    logger.info("[consumer_data_git_hub] Polling for messages...")
+    try:
+        for msg in consumer:
+            payload = msg.value  # already deserialized dict
+            row = process_message(payload, ref_pairs, flag_words)
 
-        # Store every processed message
-        insert_row(sqlite_path, row)
+            # Store every processed message
+            insert_row(sqlite_path, row)
 
-        # >>> ADD THIS BLOCK HERE <<<
-        decision = should_alert(row)
-        logger.info("[consumer_data_git_hub] Alert decision=%s :: %s",
-                    decision, explain_alert_decision(row))
-
-        if decision:
-            insert_alert(sqlite_path, row)
-            logger.warning(
-                "[ALERT] ts=%s author=%s hits=%s [%s] :: %s",
-                row["src_timestamp"],
-                row["author"],
-                row["keyword_hit_count"],
-                row["keywords_hit"] or "none",
-                (row["message"][:140] + "…") if len(row["message"]) > 150 else row["message"],
+            # Alert decision & record
+            decision = should_alert(row)
+            logger.info(
+                "[consumer_data_git_hub] Alert decision=%s :: %s",
+                decision,
+                explain_alert_decision(row),
             )
 
-            except ValueError as ve:
-                # Windows + kafka-python sometimes throws:
-                # ValueError: Invalid file descriptor: -1
-                msg = str(ve)
-                if "Invalid file descriptor" in msg:
-                    logger.error("[consumer_data_git_hub] Poll loop hit '%s'. Recreating consumer...", msg)
-                    try:
-                        consumer.close()
-                    except Exception:
-                        pass
-                    consumer = make_consumer()
-                    continue
-                else:
-                    raise
+            if decision:
+                insert_alert(sqlite_path, row)
+                logger.warning(
+                    "[ALERT] ts=%s author=%s hits=%s [%s] :: %s",
+                    row["src_timestamp"],
+                    row["author"],
+                    row["keyword_hit_count"],
+                    row["keywords_hit"] or "none",
+                    (row["message"][:140] + "…") if len(row["message"]) > 150 else row["message"],
+                )
 
-            except OSError as oe:
-                logger.error("[consumer_data_git_hub] Socket error during poll: %s. Recreating consumer...", oe)
-                try:
-                    consumer.close()
-                except Exception:
-                    pass
-                consumer = make_consumer()
-                continue
-
-            except KeyboardInterrupt:
-                logger.warning("[consumer_data_git_hub] Interrupted by user.")
-                break
-
+    except KeyboardInterrupt:
+        logger.warning("[consumer_data_git_hub] Interrupted by user.")
     except Exception as e:
         logger.error(f"[consumer_data_git_hub] Runtime error: {e}")
         raise
     finally:
-        try:
-            consumer.close()
-        except Exception:
-            pass
         logger.info("[consumer_data_git_hub] Shutdown complete.")
 
+# ======================================================================================
+# Entry
+# ======================================================================================
 
 if __name__ == "__main__":
     main()
