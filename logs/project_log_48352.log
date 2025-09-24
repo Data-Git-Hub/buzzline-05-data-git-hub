@@ -1,0 +1,37 @@
+2025-09-23 23:52:23 | INFO | Logging to file: logs/project_log_48352.log
+2025-09-23 23:52:23 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 23:52:23 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 23:52:23 | INFO | Use Ctrl+C to stop.
+2025-09-23 23:52:23 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 23:52:23 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 23:52:23 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 23:52:23 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 23:52:23 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 23:52:23 | INFO | [producer_much_ado] Using reference JSON: PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 23:52:23 | INFO | Deleted existing live data file.
+2025-09-23 23:52:23 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:52:24 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 23:52:24 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:52:24 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 23:52:24 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 23:52:24 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 23:52:24 | INFO | {'message': 'He hath done good service, lady, in these wars.', 'author': 'benedick', 'timestamp': '2025-09-23 23:52:24', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 47}
+2025-09-23 23:52:29 | INFO | {'message': 'My liege, your Highness now may do me good.', 'author': 'beatrice', 'timestamp': '2025-09-23 23:52:29', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 43}
+2025-09-23 23:52:34 | INFO | {'message': 'she were unhandsome, and being no other but as she is, I do not like her.', 'author': 'leonato', 'timestamp': '2025-09-23 23:52:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 23:52:39 | INFO | {'message': 'young Florentine called Claudio.', 'author': 'don pedro', 'timestamp': '2025-09-23 23:52:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 32}
+2025-09-23 23:52:44 | INFO | {'message': 'Please it your Grace lead on?', 'author': 'don john', 'timestamp': '2025-09-23 23:52:44', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 29}
+2025-09-23 23:52:49 | INFO | {'message': 'That I love her, I feel.', 'author': 'messenger', 'timestamp': '2025-09-23 23:52:49', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 24}
+2025-09-23 23:52:54 | INFO | {'message': 'mischief. I cannot hide what I am: I must be sad when I have cause, and', 'author': 'don pedro', 'timestamp': '2025-09-23 23:52:54', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 23:52:59 | INFO | {'message': 'Let me bid you welcome, my lord: being reconciled to', 'author': 'claudio', 'timestamp': '2025-09-23 23:52:59', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 52}
+2025-09-23 23:53:04 | INFO | {'message': 'the Prince your brother, I owe you all duty.', 'author': 'don john', 'timestamp': '2025-09-23 23:53:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 44}
+2025-09-23 23:53:09 | INFO | {'message': 'He is very near by this: he was not three leagues off when I left him.', 'author': 'don john', 'timestamp': '2025-09-23 23:53:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 70}
+2025-09-23 23:53:14 | INFO | {'message': 'brow, or do you play the flouting Jack, to tell us Cupid is a good', 'author': 'don pedro', 'timestamp': '2025-09-23 23:53:14', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 66}
+2025-09-23 23:53:19 | INFO | {'message': 'If Signior Leonato be her father, she would not have his head on', 'author': 'leonato', 'timestamp': '2025-09-23 23:53:19', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 64}
+2025-09-23 23:53:24 | INFO | {'message': 'Let me bid you welcome, my lord: being reconciled to', 'author': 'don john', 'timestamp': '2025-09-23 23:53:24', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 52}
+2025-09-23 23:53:29 | INFO | {'message': 'ere you flout old ends any further, examine your conscience: and so I', 'author': 'antonio', 'timestamp': '2025-09-23 23:53:29', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 69}
+2025-09-23 23:53:34 | INFO | {'message': 'you come in her presence.', 'author': 'benedick', 'timestamp': '2025-09-23 23:53:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 25}
+2025-09-23 23:53:39 | INFO | {'message': 'In practice let us put it presently.', 'author': 'don john', 'timestamp': '2025-09-23 23:53:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 36}
+2025-09-23 23:53:44 | INFO | {'message': 'can cross him any way, I bless myself every way. You are both sure, and', 'author': 'benedick', 'timestamp': '2025-09-23 23:53:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 23:53:49 | INFO | {'message': 'under Saturn) goest about to apply a moral medicine to a mortifying', 'author': 'don john', 'timestamp': '2025-09-23 23:53:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 67}
+2025-09-23 23:53:51 | WARNING | Producer interrupted by user.
+2025-09-23 23:53:51 | INFO | Producer shutting down.

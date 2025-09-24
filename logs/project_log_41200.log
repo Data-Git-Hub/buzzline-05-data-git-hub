@@ -1,0 +1,39 @@
+2025-09-23 23:55:29 | INFO | Logging to file: logs/project_log_41200.log
+2025-09-23 23:55:29 | INFO | Log sanitization enabled, personal info removed
+2025-09-23 23:55:29 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-23 23:55:29 | INFO | Use Ctrl+C to stop.
+2025-09-23 23:55:29 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-23 23:55:29 | INFO | BUZZ_TOPIC: buzzline
+2025-09-23 23:55:29 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-23 23:55:29 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-23 23:55:29 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-23 23:55:29 | INFO | [producer_much_ado] Using reference JSON: PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-23 23:55:29 | INFO | Deleted existing live data file.
+2025-09-23 23:55:29 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:55:29 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-23 23:55:29 | INFO | Kafka broker address: localhost:9092
+2025-09-23 23:55:29 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-23 23:55:29 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-23 23:55:29 | INFO | Topic 'buzzline' created successfully.
+2025-09-23 23:55:29 | INFO | {'message': 'beauty as the first of May doth the last of December. But I hope you have', 'author': 'don pedro', 'timestamp': '2025-09-23 23:55:29', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 23:55:34 | INFO | {'message': 'that are so washed; how much better is it to weep at joy than to joy at', 'author': 'claudio', 'timestamp': '2025-09-23 23:55:34', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 23:55:39 | INFO | {'message': 'caught than the pestilence, and the taker runs presently mad. God help the', 'author': 'beatrice', 'timestamp': '2025-09-23 23:55:39', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 74}
+2025-09-23 23:55:44 | INFO | {'message': 'Signior Benedick, no; for then were you a child.', 'author': 'claudio', 'timestamp': '2025-09-23 23:55:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 48}
+2025-09-23 23:55:49 | INFO | {'message': 'Have left their places vacant, in their rooms', 'author': 'claudio', 'timestamp': '2025-09-23 23:55:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 45}
+2025-09-23 23:55:54 | INFO | {'message': 'To the death, my lord.', 'author': 'benedick', 'timestamp': '2025-09-23 23:55:54', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 22}
+2025-09-23 23:55:59 | INFO | {'message': 'with drinking, pick out mine eyes with a ballad-maker’s pen and hang', 'author': 'don pedro', 'timestamp': '2025-09-23 23:55:59', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-23 23:56:04 | INFO | {'message': 'me behind the arras, and there heard it agreed upon that the Prince should', 'author': 'leonato', 'timestamp': '2025-09-23 23:56:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 74}
+2025-09-23 23:56:09 | INFO | {'message': 'any, I will do myself the right to trust none; and the fine is,—for the', 'author': 'don john', 'timestamp': '2025-09-23 23:56:09', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 71}
+2025-09-23 23:56:14 | INFO | {'message': 'hath left to be known a reasonable creature. Who is his companion now? He', 'author': 'don john', 'timestamp': '2025-09-23 23:56:14', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 73}
+2025-09-23 23:56:19 | INFO | {'message': 'should be worthy, is the opinion that fire cannot melt out of me: I will', 'author': 'beatrice', 'timestamp': '2025-09-23 23:56:19', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 72}
+2025-09-23 23:56:24 | INFO | {'message': 'man’s leisure; sleep when I am drowsy, and tend on no man’s', 'author': 'don pedro', 'timestamp': '2025-09-23 23:56:24', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 59}
+2025-09-23 23:56:29 | INFO | {'message': 'If thou dost love fair Hero, cherish it,', 'author': 'claudio', 'timestamp': '2025-09-23 23:56:29', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 40}
+2025-09-23 23:56:34 | INFO | {'message': 'My cousin means Signior Benedick of Padua.', 'author': 'don pedro', 'timestamp': '2025-09-23 23:56:34', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 42}
+2025-09-23 23:56:39 | INFO | {'message': 'A proper squire! And who, and who? which way looks he?', 'author': 'don pedro', 'timestamp': '2025-09-23 23:56:39', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 54}
+2025-09-23 23:56:44 | INFO | {'message': 'young Florentine called Claudio.', 'author': 'benedick', 'timestamp': '2025-09-23 23:56:44', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 32}
+2025-09-23 23:56:49 | INFO | {'message': 'Well, if ever thou dost fall from this faith, thou wilt prove a', 'author': 'benedick', 'timestamp': '2025-09-23 23:56:49', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 63}
+2025-09-23 23:56:54 | INFO | {'message': 'Can the world buy such a jewel?', 'author': 'don pedro', 'timestamp': '2025-09-23 23:56:54', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 31}
+2025-09-23 23:56:59 | INFO | {'message': 'brow, or do you play the flouting Jack, to tell us Cupid is a good', 'author': 'benedick', 'timestamp': '2025-09-23 23:56:59', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 66}
+2025-09-23 23:57:04 | INFO | {'message': 'pluck off the bull’s horns and set them in my forehead; and let me', 'author': 'leonato', 'timestamp': '2025-09-23 23:57:04', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 66}
+2025-09-23 23:57:09 | WARNING | Producer interrupted by user.
+2025-09-23 23:57:09 | INFO | Producer shutting down.

@@ -405,6 +405,7 @@ Contributors names and contact info <br>
 ---
 
 ## Version History
+- P5 Main 3.1 | Modify consumer_data_git_hub.py, README.md 
 - P5 Main 3.0 | Add bad_author.txt; Modify consumer_data_git_hub.py - add ability to track bad authors and add to database, README.md
 - P5 Main 2.3 | Modify consumer_data_git_hub.py, README.md
 - P5 Main 2.2 | Modify multiple files in app.

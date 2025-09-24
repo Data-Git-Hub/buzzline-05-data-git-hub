@@ -1,0 +1,50 @@
+2025-09-24 00:14:13 | INFO | Logging to file: logs/project_log_50012.log
+2025-09-24 00:14:13 | INFO | Log sanitization enabled, personal info removed
+2025-09-24 00:14:13 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] Starting (Kafka mode).
+2025-09-24 00:14:13 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-24 00:14:13 | INFO | SQLITE_PATH: PROJECT_ROOT/data/buzz.sqlite
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] Using SQLite at: PROJECT_ROOT/data/buzz.sqlite
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] SQLite ready at PROJECT_ROOT/data/buzz.sqlite
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] Loaded reference pairs: 321 from PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] Loaded 42 flag words from PROJECT_ROOT/files/flag_words.txt
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] Loaded 1 bad authors from PROJECT_ROOT/files/bad_authors.txt
+2025-09-24 00:14:13 | INFO | [consumer_data_git_hub] ALERT_ON_VALID_AUTHOR_ONLY=False ALERT_KEYWORD_MIN=1
+2025-09-24 00:14:13 | INFO | Kafka broker address: localhost:9092
+2025-09-24 00:14:14 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-24 00:14:14 | INFO | BUZZ_TOPIC: buzzline
+2025-09-24 00:14:14 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-24 00:14:14 | INFO | BUZZ_TOPIC: buzzline
+2025-09-24 00:14:14 | INFO | BUZZ_CONSUMER_GROUP_ID: buzz_group
+2025-09-24 00:14:14 | INFO | Kafka broker address: localhost:9092
+2025-09-24 00:14:14 | INFO | Creating Kafka consumer. Topic='buzzline' and group ID='buzz_group'.
+2025-09-24 00:14:14 | INFO | Kafka consumer created successfully.
+2025-09-24 00:14:14 | INFO | [consumer_data_git_hub] Polling for messages...
+2025-09-24 00:14:19 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:16', 'author': 'antonio', 'message': 'it without controlment. You have of late stood out against your brother,', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:19 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:19 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:21 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:21', 'author': 'beatrice', 'message': 'it is needful that you frame the season for your own harvest.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:21 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:21 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:26 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:26', 'author': 'benedick', 'message': 'The sixth of July: your loving friend, Benedick.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:26 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:26 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:31 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:31', 'author': 'leonato', 'message': 'That thou began’st to twist so fine a story?', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:31 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:31 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:36 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:36', 'author': 'conrade', 'message': 'A good sharp fellow: I will send for him; and question him yourself.', 'author_message_valid': 0, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:36 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:36 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:41 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:41', 'author': 'antonio', 'message': 'He is very busy about it. But, brother, I can tell you strange', 'author_message_valid': 1, 'keyword_hit_count': 0, 'keywords_hit': 'none', 'bad_author_flag': 0}
+2025-09-24 00:14:41 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:41 | INFO | [consumer_data_git_hub] Alert decision=False :: bad_author=NO | kw_hits=0 (min=1) | author_valid=True | policy_valid_only=False
+2025-09-24 00:14:46 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:46', 'author': 'leonato', 'message': 'Is it possible Disdain should die while she hath such meet food', 'author_message_valid': 0, 'keyword_hit_count': 2, 'keywords_hit': 'die, disdain', 'bad_author_flag': 0}
+2025-09-24 00:14:46 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:46 | INFO | [consumer_data_git_hub] Alert decision=True :: bad_author=NO | kw_hits=2 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:46 | WARNING | [ALERT] ts=2025-09-24 00:14:46 author=leonato hits=2 [die, disdain] :: Is it possible Disdain should die while she hath such meet food
+2025-09-24 00:14:51 | INFO | [consumer_data_git_hub] Processed row: {'src_timestamp': '2025-09-24 00:14:51', 'author': 'benedick', 'message': 'villain. I am trusted with a muzzle and enfranchised with a clog;', 'author_message_valid': 0, 'keyword_hit_count': 1, 'keywords_hit': 'villain', 'bad_author_flag': 0}
+2025-09-24 00:14:51 | INFO | [consumer_data_git_hub] Inserted one processed row.
+2025-09-24 00:14:51 | INFO | [consumer_data_git_hub] Alert decision=True :: bad_author=NO | kw_hits=1 (min=1) | author_valid=False | policy_valid_only=False
+2025-09-24 00:14:51 | WARNING | [ALERT] ts=2025-09-24 00:14:51 author=benedick hits=1 [villain] :: villain. I am trusted with a muzzle and enfranchised with a clog;
+2025-09-24 00:14:53 | WARNING | [consumer_data_git_hub] Interrupted by user.
+2025-09-24 00:14:53 | INFO | [consumer_data_git_hub] Shutdown complete.

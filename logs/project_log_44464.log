@@ -1,0 +1,29 @@
+2025-09-24 00:14:10 | INFO | Logging to file: logs/project_log_44464.log
+2025-09-24 00:14:10 | INFO | Log sanitization enabled, personal info removed
+2025-09-24 00:14:10 | INFO | Starting Much Ado Producer (random author + random message).
+2025-09-24 00:14:10 | INFO | Use Ctrl+C to stop.
+2025-09-24 00:14:10 | INFO | MESSAGE_INTERVAL_SECONDS: 5
+2025-09-24 00:14:10 | INFO | BUZZ_TOPIC: buzzline
+2025-09-24 00:14:10 | INFO | KAFKA_BROKER_ADDRESS: 127.0.0.1:9092
+2025-09-24 00:14:10 | INFO | BASE_DATA_DIR: PROJECT_ROOT/data
+2025-09-24 00:14:10 | INFO | LIVE_DATA_PATH: PROJECT_ROOT/data/project_live.json
+2025-09-24 00:14:10 | INFO | [producer_much_ado] Using reference JSON: PROJECT_ROOT/files/much_ado_excerpt.json
+2025-09-24 00:14:10 | INFO | Deleted existing live data file.
+2025-09-24 00:14:10 | INFO | Kafka broker address: localhost:9092
+2025-09-24 00:14:10 | INFO | Kafka is ready. Brokers: {'throttle_time_ms': 0, 'brokers': [{'node_id': 1, 'host': '127.0.0.1', 'port': 9092, 'rack': None}], 'cluster_id': 'izX4qtgsSweNTi1cWUWQEA', 'controller_id': 1}
+2025-09-24 00:14:11 | INFO | Kafka broker address: localhost:9092
+2025-09-24 00:14:11 | INFO | Topic 'buzzline' already exists. Recreating fresh...
+2025-09-24 00:14:11 | INFO | Requested deletion of topic 'buzzline'.
+2025-09-24 00:14:11 | INFO | Topic 'buzzline' created successfully.
+2025-09-24 00:14:11 | INFO | {'message': 'I will assume thy part in some disguise,', 'author': 'beatrice', 'timestamp': '2025-09-24 00:14:11', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 40}
+2025-09-24 00:14:16 | INFO | {'message': 'it without controlment. You have of late stood out against your brother,', 'author': 'antonio', 'timestamp': '2025-09-24 00:14:16', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 72}
+2025-09-24 00:14:21 | INFO | {'message': 'it is needful that you frame the season for your own harvest.', 'author': 'beatrice', 'timestamp': '2025-09-24 00:14:21', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 61}
+2025-09-24 00:14:26 | INFO | {'message': 'The sixth of July: your loving friend, Benedick.', 'author': 'benedick', 'timestamp': '2025-09-24 00:14:26', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 48}
+2025-09-24 00:14:31 | INFO | {'message': 'That thou began’st to twist so fine a story?', 'author': 'leonato', 'timestamp': '2025-09-24 00:14:31', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 44}
+2025-09-24 00:14:36 | INFO | {'message': 'A good sharp fellow: I will send for him; and question him yourself.', 'author': 'conrade', 'timestamp': '2025-09-24 00:14:36', 'category': 'literature', 'sentiment': 1.0, 'keyword_mentioned': 'none', 'message_length': 68}
+2025-09-24 00:14:41 | INFO | {'message': 'He is very busy about it. But, brother, I can tell you strange', 'author': 'antonio', 'timestamp': '2025-09-24 00:14:41', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 62}
+2025-09-24 00:14:46 | INFO | {'message': 'Is it possible Disdain should die while she hath such meet food', 'author': 'leonato', 'timestamp': '2025-09-24 00:14:46', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 63}
+2025-09-24 00:14:51 | INFO | {'message': 'villain. I am trusted with a muzzle and enfranchised with a clog;', 'author': 'benedick', 'timestamp': '2025-09-24 00:14:51', 'category': 'literature', 'sentiment': 0.0, 'keyword_mentioned': 'none', 'message_length': 65}
+2025-09-24 00:14:56 | INFO | {'message': 'five wits went halting off, and now is the whole man governed with one! So', 'author': 'leonato', 'timestamp': '2025-09-24 00:14:56', 'category': 'literature', 'sentiment': 0.5, 'keyword_mentioned': 'none', 'message_length': 74}
+2025-09-24 00:14:57 | WARNING | Producer interrupted by user.
+2025-09-24 00:14:57 | INFO | Producer shutting down.
