@@ -344,3 +344,7 @@ See the [LICENSE](LICENSE.txt) file for more.
 - Ruff by Astral Software (Linter + Formatter)
 - **SQLite Viewer by Florian Klampfer**
 - WSL by Microsoft (on Windows Machines)
+
+
+## P5: Database Integration with Streaming Pipelines
+
