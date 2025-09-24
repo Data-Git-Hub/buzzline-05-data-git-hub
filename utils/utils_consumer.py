@@ -72,16 +72,19 @@ def create_kafka_consumer(
 
     try:
         consumer = KafkaConsumer(
-            topic,
-            group_id=consumer_group_id,
-            value_deserializer=value_deserializer,
-            bootstrap_servers=kafka_broker,
-            auto_offset_reset="earliest",
-            enable_auto_commit=True,
-            request_timeout_ms=30000,
-            session_timeout_ms=15000,
-            heartbeat_interval_ms=3000,
-        )
+    topic,
+    group_id=consumer_group_id,
+    value_deserializer=value_deserializer,
+    bootstrap_servers=kafka_broker,
+    auto_offset_reset="earliest",
+    enable_auto_commit=True,
+    request_timeout_ms=30000,
+    session_timeout_ms=15000,       # keep only one of these
+    heartbeat_interval_ms=3000,
+    api_version_auto_timeout_ms=10000,  # ok with kafka-python-ng; remove if your version balks
+    reconnect_backoff_ms=100,
+    reconnect_backoff_max_ms=1000,
+)
         logger.info("Kafka consumer created successfully.")
         return consumer
     except Exception as e:

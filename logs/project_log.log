@@ -1,0 +1,8 @@
+2025-09-23 20:24:25 | INFO | {'message': 'I just loved an app! It was boring.', 'author': 'Bob', 'timestamp': '2025-09-23 20:24:25', 'category': 'other', 'sentiment': 0.64, 'keyword_mentioned': 'other', 'message_length': 35}
+2025-09-23 20:24:25 | INFO | Called process_message() with:
+2025-09-23 20:24:25 | INFO |    message={'message': 'I just loved an app! It was boring.', 'author': 'Bob', 'timestamp': '2025-09-23 20:24:25', 'category': 'other', 'sentiment': 0.64, 'keyword_mentioned': 'other', 'message_length': 35}
+2025-09-23 20:24:25 | INFO | Processed message: {'message': 'I just loved an app! It was boring.', 'author': 'Bob', 'timestamp': '2025-09-23 20:24:25', 'category': 'other', 'sentiment': 0.64, 'keyword_mentioned': 'other', 'message_length': 35}
+2025-09-23 20:24:25 | INFO | Calling SQLite insert_message() with:
+2025-09-23 20:24:25 | INFO | message={'message': 'I just loved an app! It was boring.', 'author': 'Bob', 'timestamp': '2025-09-23 20:24:25', 'category': 'other', 'sentiment': 0.64, 'keyword_mentioned': 'other', 'message_length': 35}
+2025-09-23 20:24:25 | INFO | db_path=WindowsPath('C:/Projects/buzzline-05-data-git-hub/data/buzz.sqlite')
+2025-09-23 20:24:25 | INFO | Inserted one message into the database.

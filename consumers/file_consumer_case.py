@@ -170,15 +170,55 @@ def main():
         logger.error(f"ERROR: Failed to create db table: {e}")
         sys.exit(3)
 
-    logger.info("STEP 4. Begin consuming and storing messages.")
+logger.info("Step 4. Process messages.")
+
+if consumer is None:
+    logger.error("ERROR: Consumer is None. Exiting.")
+    sys.exit(13)
+
+# Windows-friendly poll loop with defensive retry
+max_restarts = 3
+restart_delay_secs = 1.0
+attempt = 0
+
+while True:
     try:
-        consume_messages_from_file(live_data_path, sqlite_path, interval_secs, 0)
-    except KeyboardInterrupt:
-        logger.warning("Consumer interrupted by user.")
+        # Poll returns a dict: {TopicPartition: [ConsumerRecord, ...], ...}
+        records = consumer.poll(timeout_ms=1000, max_records=500)
+        if not records:
+            continue  # no messages yet; keep polling
+
+        for _tp, msgs in records.items():
+            for msg in msgs:
+                processed_message = process_message(msg.value)
+                if processed_message:
+                    insert_message(processed_message, sql_path)
+
     except Exception as e:
-        logger.error(f"ERROR: Unexpected error: {e}")
-    finally:
-        logger.info("TRY/FINALLY: Consumer shutting down.")
+        logger.error(f"ERROR: Could not consume messages from Kafka: {e}")
+        attempt += 1
+        try:
+            consumer.close()
+        except Exception:
+            pass
+        if attempt > max_restarts:
+            logger.error("Max restarts exceeded; exiting.")
+            raise
+        logger.warning(f"Recreating consumer (attempt {attempt}/{max_restarts}) after brief delay...")
+        import time as _time
+        _time.sleep(restart_delay_secs)
+
+        # Recreate consumer
+        try:
+            consumer = create_kafka_consumer(
+                topic,
+                group,
+                value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
+            )
+            logger.info("Kafka consumer re-created successfully.")
+        except Exception as ee:
+            logger.error(f"Failed to re-create consumer: {ee}")
+            raise
 
 
 #####################################

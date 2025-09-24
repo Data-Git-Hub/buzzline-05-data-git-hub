@@ -37,9 +37,9 @@ DEFAULT_KAFKA_BROKER_ADDRESS = "localhost:9092"
 #####################################
 
 
-def get_kafka_broker_address():
+def get_kafka_broker_address() -> str:
     """Fetch Kafka broker address from environment or use default."""
-    broker_address = os.getenv("KAFKA_BROKER_ADDRESS", "localhost:9092")
+    broker_address = os.getenv("KAFKA_BROKER_ADDRESS", DEFAULT_KAFKA_BROKER_ADDRESS)
     logger.info(f"Kafka broker address: {broker_address}")
     return broker_address
 
@@ -49,7 +49,7 @@ def get_kafka_broker_address():
 #####################################
 
 
-def check_kafka_service_is_ready():
+def check_kafka_service_is_ready() -> bool:
     """
     Check if Kafka is ready by connecting to the broker and fetching metadata.
 
@@ -66,6 +66,9 @@ def check_kafka_service_is_ready():
         return True
     except errors.KafkaError as e:
         logger.error(f"Error checking Kafka: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"Error checking Kafka (generic): {e}")
         return False
 
 
@@ -133,7 +136,8 @@ def create_kafka_producer(
 def _topic_exists(admin: KafkaAdminClient, topic_name: str) -> bool:
     try:
         return topic_name in set(admin.list_topics())
-    except Exception:
+    except Exception as e:
+        logger.warning(f"Topic existence check failed for '{topic_name}': {e}")
         # If listing fails, assume it doesn't exist to avoid false positives
         return False
 
@@ -154,7 +158,7 @@ def _delete_topic_if_exists(admin: KafkaAdminClient, topic_name: str) -> None:
         logger.warning(f"Ignoring topic deletion issue for '{topic_name}': {e}")
 
 
-def create_kafka_topic(topic_name, group_id=None) -> None:
+def create_kafka_topic(topic_name: str, group_id: Optional[str] = None) -> None:
     """
     Create a fresh Kafka topic with the given name.
     If it already exists, delete and recreate it (simple reset; no retention tweaks).
@@ -188,7 +192,7 @@ def create_kafka_topic(topic_name, group_id=None) -> None:
                 pass
 
 
-def clear_kafka_topic(topic_name: str, group_id: Optional[str] = None):
+def clear_kafka_topic(topic_name: str, group_id: Optional[str] = None) -> None:
     """
     Clear all messages in a Kafka topic by deleting and recreating it.
     This keeps the same function signature but uses a simpler, more reliable approach.
@@ -218,6 +222,34 @@ def clear_kafka_topic(topic_name: str, group_id: Optional[str] = None):
         logger.error(f"Error clearing topic '{topic_name}': {e}")
     finally:
         admin_client.close()
+
+
+#####################################
+# Topic Availability (added)
+#####################################
+
+def is_topic_available(topic: str) -> bool:
+    """
+    Return True if `topic` exists on the currently configured cluster.
+
+    NOTE: This is a single-argument helper so existing code like
+          `is_topic_available(topic)` in kafka_consumer_case.py works unchanged.
+    """
+    kafka_broker = get_kafka_broker_address()
+    try:
+        admin_client = KafkaAdminClient(bootstrap_servers=kafka_broker)
+        try:
+            exists = _topic_exists(admin_client, topic)
+            logger.info(f"Topic availability check for '{topic}': {exists}")
+            return exists
+        finally:
+            try:
+                admin_client.close()
+            except Exception:
+                pass
+    except Exception as e:
+        logger.error(f"Failed to check topic availability for '{topic}': {e}")
+        return False
 
 
 #####################################
