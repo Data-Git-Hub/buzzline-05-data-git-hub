@@ -21,7 +21,6 @@ import json
 import os
 import re
 import sqlite3
-import string
 import pathlib
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple
 
@@ -42,25 +41,22 @@ from utils.utils_producer import verify_services
 ALERT_ON_VALID_AUTHOR_ONLY: bool = True
 
 # --------------------------------------------------------------------------------------------------
-# Reference & flags paths
+# File locations (adjust only if you move the shared files folder)
 # --------------------------------------------------------------------------------------------------
 
+# Reference JSON (Much Ado) candidates
 REF_FILE_CANDIDATES: List[pathlib.Path] = [
-    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_excerpt.json"),  # preferred
+    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_excerpt.json"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_except.json"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\much_ado_execpt.json"),
 ]
 
+# Flag words (REQUIRED for keyword alerts; no auto-derivation)
 FLAG_FILE_CANDIDATES: List[pathlib.Path] = [
-    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words.txt"),
+    pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words"),
     pathlib.Path(r"C:\Projects\files\buzzline-05-data-git-hub\flag_words.json"),
 ]
-
-# If no flag file found, we will generate this file from the reference JSON:
-DEFAULT_FLAG_WORDS_OUT: pathlib.Path = pathlib.Path(
-    r"C:\Projects\files\buzzline-05-data-git-hub\flag_words.txt"
-)
 
 # --------------------------------------------------------------------------------------------------
 # SQLite schema
@@ -157,319 +153,151 @@ def should_alert(row: Mapping[str, Any]) -> bool:
 
 
 # --------------------------------------------------------------------------------------------------
-# Reference loader (Much Ado)
+# Reference corpus (Much Ado) loader and token helpers
+# --------------------------------------------------------------------------------------------------
+
+_TOKEN_RE = re.compile(r"[A-Za-z']+")
+
+
+def _tokenize_lower(text: str) -> List[str]:
+    return [t.lower() for t in _TOKEN_RE.findall(text or "")]
+
+
+def load_reference_pairs_and_tokens() -> Tuple[Set[Tuple[str, str]], List[str]]:
+    """
+    Load the Much Ado reference JSON. Returns:
+      - a set of (author_lower, message_stripped_lower)
+      - a flat list of tokens from all messages (lowercased)  [tokens kept for potential future use]
+    """
+    ref_path: Optional[pathlib.Path] = None
+    for p in REF_FILE_CANDIDATES:
+        if p.exists():
+            ref_path = p
+            break
+
+    if not ref_path:
+        logger.warning("[consumer_data_git_hub] No reference file found; author validation will be 0.")
+        return set(), []
+
+    try:
+        raw = ref_path.read_text(encoding="utf-8")
+        data = json.loads(raw)
+        pairs: Set[Tuple[str, str]] = set()
+        tokens: List[str] = []
+        for item in data:
+            author = str(item.get("author", "")).strip().lower()
+            message = str(item.get("message", "")).strip().lower()
+            if author and message:
+                pairs.add((author, message))
+            tokens.extend(_tokenize_lower(message))
+        logger.info(f"[consumer_data_git_hub] Loaded reference pairs: {len(pairs)} from {ref_path}")
+        return pairs, tokens
+    except Exception as e:
+        logger.error(f"[consumer_data_git_hub] Failed to read reference file: {e}")
+        return set(), []
+
+
+# --------------------------------------------------------------------------------------------------
+# Flag words (file ONLY; no derivation)
 # --------------------------------------------------------------------------------------------------
 
 
-def load_reference_pairs() -> Set[Tuple[str, str]]:
-    """Return a set of (author_lower, exact_message) from first existing ref file."""
-    for p in REF_FILE_CANDIDATES:
-        try:
-            if p.exists():
-                data = json.loads(p.read_text(encoding="utf-8"))
-                pairs: Set[Tuple[str, str]] = set()
-                for item in data:
-                    # tolerant parsing
-                    msg = str(item.get("message", "")).strip()
-                    auth = str(item.get("author", "")).strip().lower()
-                    if msg and auth:
-                        pairs.add((auth, msg))
-                logger.info(f"[consumer_data_git_hub] Using reference file: {p}")
-                logger.info(f"[consumer_data_git_hub] Loaded {len(pairs)} ref pairs.")
-                return pairs
-        except Exception as e:
-            logger.warning(f"[consumer_data_git_hub] Failed to load reference {p}: {e}")
+def load_flag_words() -> Set[str]:
+    """
+    Load flag words (required for alerts) from one of the known files:
+      - flag_words.txt (preferred): one word per line
+      - flag_words       (no extension): one word per line
+      - flag_words.json  (JSON array of words)
+    No auto-derivation. If not found, returns empty set.
+    """
+    for p in FLAG_FILE_CANDIDATES:
+        if p.exists():
+            try:
+                if p.suffix.lower() == ".json":
+                    words = set(json.loads(p.read_text(encoding="utf-8")))
+                else:
+                    words = {
+                        w.strip().lower()
+                        for w in p.read_text(encoding="utf-8").splitlines()
+                        if w.strip()
+                    }
+                if words:
+                    logger.info(f"[consumer_data_git_hub] Loaded {len(words)} flag words from {p}")
+                    return words
+            except Exception as e:
+                logger.warning(f"[consumer_data_git_hub] Could not read flag words from {p}: {e}")
+
     logger.warning(
-        "[consumer_data_git_hub] No reference file found; author validation will be 0."
+        "[consumer_data_git_hub] No flag words file found; keyword alerts will never trigger."
     )
     return set()
 
 
 # --------------------------------------------------------------------------------------------------
-# Flag words: load or auto-generate from reference JSON
-# --------------------------------------------------------------------------------------------------
-
-# A small, hand-rolled stopword set (so we don’t add dependencies).
-_STOPWORDS = {
-    "the",
-    "and",
-    "to",
-    "of",
-    "a",
-    "i",
-    "in",
-    "you",
-    "that",
-    "it",
-    "is",
-    "my",
-    "for",
-    "with",
-    "not",
-    "be",
-    "me",
-    "he",
-    "his",
-    "she",
-    "her",
-    "we",
-    "they",
-    "them",
-    "as",
-    "but",
-    "have",
-    "had",
-    "are",
-    "on",
-    "so",
-    "do",
-    "this",
-    "your",
-    "at",
-    "by",
-    "or",
-    "from",
-    "what",
-    "who",
-    "there",
-    "no",
-    "will",
-    "if",
-    "did",
-    "shall",
-    "their",
-    "an",
-    "were",
-    "which",
-    "when",
-    "all",
-    "our",
-    "now",
-    "than",
-    "then",
-    "been",
-    "into",
-    "would",
-    "should",
-    "could",
-    "was",
-    "o",
-    "oh",
-    "ye",
-    "thou",
-    "thee",
-    "thy",
-    "thee",
-    "sir",
-    "lord",
-    "lady",
-}
-
-
-_WORD_RE = re.compile(r"[A-Za-z][A-Za-z']+")  # keep simple words with apostrophes
-
-
-def _tokenize(text: str) -> Iterable[str]:
-    for w in _WORD_RE.findall(text.lower()):
-        yield w.strip("'")
-
-
-def _load_raw_messages_from_ref() -> List[str]:
-    """Load raw messages from the first existing reference file."""
-    for p in REF_FILE_CANDIDATES:
-        try:
-            if p.exists():
-                data = json.loads(p.read_text(encoding="utf-8"))
-                msgs = []
-                for item in data:
-                    msg = str(item.get("message", "")).strip()
-                    if msg:
-                        msgs.append(msg)
-                return msgs
-        except Exception:
-            pass
-    return []
-
-
-def _top_tokens_from_messages(msgs: Sequence[str], top_n: int = 10) -> List[str]:
-    """Find top-N frequent tokens (simple heuristic -> mostly nouns/verbs)."""
-    from collections import Counter
-
-    cnt: Counter[str] = Counter()
-    for m in msgs:
-        for tok in _tokenize(m):
-            if tok in _STOPWORDS:
-                continue
-            if len(tok) < 3:
-                continue
-            cnt[tok] += 1
-
-    # pick most common; this generally yields nouns/verbs without full POS tagging
-    return [w for (w, _) in cnt.most_common(top_n)]
-
-
-def _save_flag_words_plain(words: Sequence[str], out_path: pathlib.Path) -> None:
-    """Save newline-separated file."""
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text("\n".join(words) + "\n", encoding="utf-8")
-
-
-def _load_flag_words_file(path: pathlib.Path) -> List[str]:
-    """Load words from .json or plain text."""
-    try:
-        if path.suffix.lower() == ".json":
-            data = json.loads(path.read_text(encoding="utf-8"))
-            words = [str(w).strip().lower() for w in data if str(w).strip()]
-            return words
-        else:
-            # plain text: newline or comma separated
-            raw = path.read_text(encoding="utf-8")
-            parts = re.split(r"[\n,]+", raw)
-            words = [p.strip().lower() for p in parts if p.strip()]
-            return words
-    except Exception as e:
-        logger.warning(f"[consumer_data_git_hub] Failed to load flags from {path}: {e}")
-        return []
-
-
-def load_or_build_flag_words() -> List[str]:
-    # 1) look for an existing flag words file
-    for p in FLAG_FILE_CANDIDATES:
-        if p.exists():
-            words = _load_flag_words_file(p)
-            if words:
-                logger.info(f"[consumer_data_git_hub] Using flag words file: {p}")
-                logger.info(f"[consumer_data_git_hub] Loaded {len(words)} flag words.")
-                return words
-
-    # 2) not found -> try to build from reference JSON
-    msgs = _load_raw_messages_from_ref()
-    if msgs:
-        top10 = _top_tokens_from_messages(msgs, top_n=10)
-        _save_flag_words_plain(top10, DEFAULT_FLAG_WORDS_OUT)
-        logger.info(
-            "[consumer_data_git_hub] No flag words file found. "
-            f"Built top-10 list from reference and saved to {DEFAULT_FLAG_WORDS_OUT}: {top10}"
-        )
-        return top10
-
-    # 3) no reference either -> none (alerts won’t trigger)
-    logger.warning(
-        "[consumer_data_git_hub] No flag words file found; keyword hits will be 0."
-    )
-    return []
-
-
-# --------------------------------------------------------------------------------------------------
-# Message processing
+# Per-message processing
 # --------------------------------------------------------------------------------------------------
 
 
-def _find_keyword_hits(message_text: str, flag_words: Sequence[str]) -> List[str]:
-    """Return the list of flag words found in the message (case-insensitive, token-wise)."""
-    if not flag_words:
-        return []
-    msg_tokens = set(_tokenize(message_text))
-    hits = [w for w in flag_words if w in msg_tokens]
-    return hits
+def validate_author_message(
+    author: str,
+    message: str,
+    ref_pairs: Set[Tuple[str, str]],
+) -> bool:
+    """
+    Exact match on (author_lower, message_lower) against the reference set.
+    """
+    a = (author or "").strip().lower()
+    m = (message or "").strip().lower()
+    return (a, m) in ref_pairs
+
+
+def count_keyword_hits(message: str, flag_words: Set[str]) -> Tuple[int, str]:
+    """
+    Count keyword hits; returns (count, comma_separated_keywords_hit).
+    """
+    if not message or not flag_words:
+        return 0, ""
+    toks = set(_tokenize_lower(message))
+    hits = sorted(list(toks.intersection(flag_words)))
+    return (len(hits), ", ".join(hits))
 
 
 def process_message(
-    msg: Mapping[str, Any], ref_pairs: Set[Tuple[str, str]], flag_words: Sequence[str]
-) -> Optional[Dict[str, Any]]:
-    try:
-        raw_message = str(msg.get("message", "")).strip()
-        raw_author = str(msg.get("author", "")).strip()
-        ts = str(msg.get("timestamp", "")).strip()
-
-        if not raw_message:
-            return None
-
-        author_norm = raw_author.lower()
-
-        author_message_valid = (author_norm, raw_message) in ref_pairs if ref_pairs else False
-        hits = _find_keyword_hits(raw_message, flag_words)
-
-        row = {
-            "src_timestamp": ts,
-            "author": raw_author,
-            "message": raw_message,
-            "author_message_valid": 1 if author_message_valid else 0,
-            "keyword_hit_count": len(hits),
-            "keywords_hit": ",".join(hits),
-        }
-
-        logger.info(f"[consumer_data_git_hub] Processed row: {row}")
-        return row
-    except Exception as e:
-        logger.error(f"[consumer_data_git_hub] Error processing message: {e}")
-        return None
-
-
-# --------------------------------------------------------------------------------------------------
-# Kafka consume loop
-# --------------------------------------------------------------------------------------------------
-
-
-def consume_messages_from_kafka(
-    topic: str,
-    group_id: str,
-    sqlite_path: pathlib.Path,
+    payload: Mapping[str, Any],
     ref_pairs: Set[Tuple[str, str]],
-    flag_words: Sequence[str],
-) -> None:
-    # Step 1. Verify Kafka services
-    verify_services(strict=True)
+    flag_words: Set[str],
+) -> Dict[str, Any]:
+    """
+    Transform one incoming JSON message into a stored row structure.
+    """
+    author = str(payload.get("author", "")).strip()
+    message = str(payload.get("message", "")).strip()
+    ts = str(payload.get("timestamp", ""))
 
-    # Step 2. Create consumer
-    consumer: KafkaConsumer = create_kafka_consumer(
-        topic,
-        group_id,
-        value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
-    )
+    valid = validate_author_message(author, message, ref_pairs)
+    kw_count, kw_list = count_keyword_hits(message, flag_words)
 
-    logger.info("[consumer_data_git_hub] Polling for messages...")
-
-    # Step 3. Iterate
-    try:
-        for message in consumer:
-            # message.value is already a dict (due to deserializer above)
-            row = process_message(message.value, ref_pairs, flag_words)
-            if not row:
-                continue
-
-            insert_row(sqlite_path, row)
-
-            # Alert path
-            if should_alert(row):
-                logger.warning(
-                    "[ALERT] author=%r keywords=%r msg=%r",
-                    row.get("author"),
-                    row.get("keywords_hit"),
-                    row.get("message"),
-                )
-                insert_alert(sqlite_path, row)
-    except KeyboardInterrupt:
-        logger.warning("[consumer_data_git_hub] Interrupted by user.")
-    except Exception as e:
-        logger.error(f"[consumer_data_git_hub] Unexpected error: {e}")
-    finally:
-        try:
-            consumer.close()
-        except Exception:
-            pass
-        logger.info("[consumer_data_git_hub] Shutdown complete.")
+    row = {
+        "src_timestamp": ts,
+        "author": author,
+        "message": message,
+        "author_message_valid": int(valid),
+        "keyword_hit_count": int(kw_count),
+        "keywords_hit": kw_list,
+    }
+    logger.info(f"[consumer_data_git_hub] Processed row: {row}")
+    return row
 
 
 # --------------------------------------------------------------------------------------------------
-# Main
+# Main (Kafka mode)
 # --------------------------------------------------------------------------------------------------
 
 
 def main() -> None:
     logger.info("[consumer_data_git_hub] Starting (Kafka mode).")
 
-    # Read config values
+    # Read config
     topic = config.get_kafka_topic()
     group_id = config.get_kafka_consumer_group_id()
     sqlite_path = config.get_sqlite_path()
@@ -477,16 +305,52 @@ def main() -> None:
     # Prepare DB
     init_db(sqlite_path)
 
-    # Load reference set & flags
-    ref_pairs = load_reference_pairs()
-    flag_words = load_or_build_flag_words()
+    # Load reference and flag words
+    ref_pairs, _ = load_reference_pairs_and_tokens()
+    flag_words = load_flag_words()
 
-    # Run Kafka consume loop
-    consume_messages_from_kafka(topic, group_id, sqlite_path, ref_pairs, flag_words)
+    # Verify Kafka up (soft)
+    try:
+        verify_services(strict=False)
+    except Exception as e:
+        logger.warning(f"[consumer_data_git_hub] Kafka verify warning: {e}")
+
+    # Create Kafka consumer
+    consumer: KafkaConsumer = create_kafka_consumer(
+        topic_provided=topic,
+        group_id_provided=group_id,
+        value_deserializer_provided=lambda x: json.loads(x.decode("utf-8")),
+    )
+
+    logger.info("[consumer_data_git_hub] Polling for messages...")
+    try:
+        for msg in consumer:
+            payload = msg.value  # already deserialized dict
+            row = process_message(payload, ref_pairs, flag_words)
+            insert_row(sqlite_path, row)
+
+            # Alert policy
+            if should_alert(row):
+                insert_alert(sqlite_path, row)
+                logger.warning(
+                    "[ALERT] ts=%s author=%s hits=%s [%s] :: %s",
+                    row["src_timestamp"],
+                    row["author"],
+                    row["keyword_hit_count"],
+                    row["keywords_hit"],
+                    (row["message"][:140] + "…") if len(row["message"]) > 150 else row["message"],
+                )
+    except KeyboardInterrupt:
+        logger.warning("[consumer_data_git_hub] Interrupted by user.")
+    except Exception as e:
+        logger.error(f"[consumer_data_git_hub] Runtime error: {e}")
+        raise
+    finally:
+        logger.info("[consumer_data_git_hub] Shutdown complete.")
 
 
 # --------------------------------------------------------------------------------------------------
-# Entrypoint
+# Conditional execution
 # --------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":

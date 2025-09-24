@@ -405,6 +405,8 @@ Contributors names and contact info <br>
 ---
 
 ## Version History
+- P5 Main 1.6 | Modify consumer_data_git_hub.py, README.md
+- P5 Main 1.5 | Modify consumer_data_git_hub.py, flag_words.txt, README.md
 - P5 Main 1.4 | Delete stopwords.txt; Modify flag_words.txt, README.md
 - P5 Main 1.3 | Add flag_words.txt, stopwords.txt; Modify README.md
 - P5 Main 1.2 | Add files folder, consumer_data_git_hub.py; Modify README.md
